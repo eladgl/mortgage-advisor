@@ -12,7 +12,11 @@ import SvgIcon from "./svgIcon";
 const RightPane = styled.div`
     display: flex;
     flex-direction: column;
-    width: 40%; 
+    width: 35%;
+    border-left: 1px solid black;
+    height: 70%;
+    justify-content: top;
+    margin-top: 3%;
 `;
 
 const LinkContainer = styled.div`
@@ -40,7 +44,9 @@ const NavBar = ({changeComponent, currentPage}) => {
     };
 
     const renderLinks = () => {
+
         return linksConfig.map(link => (
+            
             <LinkContainer key={ link.path }>
                 <Link href={ link.path } 
                       size={ link.size }
@@ -66,10 +72,12 @@ const NavBar = ({changeComponent, currentPage}) => {
 
 NavBar.propTypes = {
     changeComponent: PropTypes.func,
+    currentPage: PropTypes.string,
 };
 
 NavBar.defaultProps = {
     changeComponent: () => null,
+    currentPage: types.HOMEPAGE,
 }
 
 export default NavBar;

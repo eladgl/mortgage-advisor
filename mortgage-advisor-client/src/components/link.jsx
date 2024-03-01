@@ -5,7 +5,7 @@ import * as access from "@access";
 
 const StyledLink = styled.a`
     font-size: ${(props) => `${props.size}rem` };
-    font-weight: ${(props) => props.bold ? 700 : 200};
+    font-weight: ${(props) => props.bold ? 800 : 100};
     text-decoration: none;
     color: ${() => access.color('colors.blue05')};
     padding-right: ${(props) => `${props.padding}rem` };
@@ -17,6 +17,7 @@ const StyledLink = styled.a`
 `;
 
 const Link = ({ href, value, handleClick, size, padding, bold }) => {
+
     return (
         <StyledLink href= { "#" } onClick={ handleClick } size={ size } padding={ padding } bold={ bold }>
             { value }
@@ -29,7 +30,15 @@ Link.propTypes = {
     padding: PropTypes.number,
     size: PropTypes.number,
     value: PropTypes.string,
+    bold: PropTypes.bool,
     handleClick: PropTypes.func,
 };
+
+Link.defaultProps = {
+    href: '#',
+    handleClick: () => null,
+    value: '',
+    bold: false,
+}
 
 export default Link;

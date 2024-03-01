@@ -7,6 +7,7 @@ import { pageTypeSelector } from "./pages/pageTypeSelector";
 import NavBar from "./components/navBar";
 import styled from 'styled-components';
 import * as types from './pages/constants/pagesTypes';
+import UserCard from './components/userCard';
 
 const PageWrapper = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <Router>
+      <UserCard />
       <Layout>
         <NavBar changeComponent={ handlePageChange } currentPage={ Page }/>
         <PageWrapper>
