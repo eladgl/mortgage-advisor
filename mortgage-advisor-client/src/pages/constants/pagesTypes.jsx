@@ -1,0 +1,12 @@
+export const CHECK_BEST_MORTGAGE = "CHECK_BEST_MORTGAGE";
+export const CONTACT_US = "CONTACT_US";
+export const FEW_LOANS = "FEW_LOANS";
+export const HOMEPAGE = "HOMEPAGE";
+export const LOGIN = "LOGIN";
+export const NEW_MORTGAGE = "NEW_MORTGAGE";
+export const NORMAL_MORTGAGE = "NORMAL_MORTGAGE";
+export const OVER100K_LOAN = "OVER100K_LOAN";
+export const ONE_LOAN = "ONE_LOAN";
+export const RECOVER = "RECOVER";
+export const REGISTER = "REGISTER";
+export const UP_TO_100K_LOAN = "UP_TO_100K_LOAN";

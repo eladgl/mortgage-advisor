@@ -1,0 +1,68 @@
+export const linksConfig = [
+    //size is rem
+    {
+        title: 'דף הבית',
+        path: '/home',
+        component: 'HomePage',
+        size: 2,
+        padding: 2,
+    },
+    {
+        title: 'מעוניין לקחת משכנתא חדשה',
+        path: '/newMortgage',
+        component: 'NewMortgage',
+        size: 2,
+        padding: 2,
+    },
+    {
+        title: 'רוצה לבדוק איפה הכי כדאי לי לקחת משכנתא',
+        path: '/checkBestMortgage',
+        component: 'CheckBestMortgage',
+        size: 1.5,
+        padding: 4,
+    },
+    {
+        title: 'מעוניין לקחת הלוואה רגילה',
+        path: '/normalMortgage',
+        component: 'NormalMortgage',
+        size: 2,
+        padding: 2,
+    },
+    {
+        title: 'מעוניין לקחת הלוואה עד 100 אלף ש"ח',
+        path: '/upTo100kLoan',
+        component: 'UpTo100kLoan',
+        size: 1.5,
+        padding: 4,
+    },
+    {
+        title: 'אני מעוניין לקחת הלוואה אחת',
+        path: '/oneLoan',
+        component: 'OneLoan',
+        size: 1.3,
+        padding: 6,
+        icon: 'info',
+    },
+    {
+        title: 'אני מעוניין לקחת כמה הלוואת',
+        path: '/fewLoans',
+        component: 'FewLoans',
+        size: 1.3,
+        padding: 6,
+        icon: 'info',
+    },
+    {
+        title: 'מעוניין לקחת הלוואה מעל 100 אלף ש"ח',
+        path: '/over100kLoan',
+        component: 'Over100kLoan',
+        size: 1.5,
+        padding: 4,
+    },
+    {
+        title: 'צור קשר',
+        path: '/contactUs',
+        component: 'ContactUs',
+        size: 2,
+        padding: 2,
+    },
+]
