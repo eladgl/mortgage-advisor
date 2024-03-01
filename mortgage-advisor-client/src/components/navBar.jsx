@@ -6,6 +6,8 @@ import Link from "./link";
 import { linksConfig } from  "/src/pages/config/linksConfig";
 import * as access from "@access";
 
+import SvgIcon from "./svgIcon";
+
 const RightPane = styled.div`
     display: flex;
     flex-direction: column;
@@ -30,14 +32,14 @@ const NavBar = ({changeComponent}) => {
         return linksConfig.map(link => (
             <LinkContainer key={ link.path }>
                 <Link  
-                    noProp = {console.log(link.icon)}
+                    //noProp = { link.icon && console.log('link icon ',access.icon(`icons.${link.icon}`))}
                     href={ link.path } 
                     size={ link.size }
                     padding={ link.padding }
                     value={ link.title } 
                     component={ link.component }
                     handleClick={ () => handleClick(link.component) }/>
-                {link.icon ?? <Icon src={access.icon(`icons.${link.icon}`)}/>}
+                {link.icon && <SvgIcon name={ access.icon(`icons.${link.icon}`) }/>}
             </LinkContainer>
         ));
     };

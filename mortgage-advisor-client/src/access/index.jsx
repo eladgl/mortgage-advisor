@@ -62,15 +62,6 @@ const getNested = (type, path, delimiter = '.') => {
   return code;
 };
 
-
-// const getFormat = (path) => {
-//   return getNested('formats', path, '_');
-// };
-
-// const getGeneral = (path) => {
-//   return getNested('general', path);
-// };
-
 const getColor = (path) => {
   return getNested('colors', path);
 };
@@ -81,6 +72,5 @@ const getIcon = (path) => {
 
 export const icon = memo(getIcon);
 export const color = memo(getColor);
-//export const format = memo(getFormat);
-//export const general = memo(getGeneral);
+
 
