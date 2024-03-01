@@ -1,52 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// import Homepage from "./Homepage"; // Ensure you have this component created
-import Homepage from "./pages/homepage";
-import Register from "./pages/register";
+import HomePage from "./pages/homepage"; 
+import { pageTypeSelector } from "./pages/pageTypeSelector";
+// import Homepage from "./pages/homepage";
+// import Register from "./pages/register";
 import NavBar from "./components/navBar";
-// Dummy components for demonstration
-// const Navbar = () => (
-//   <nav style={{ backgroundColor: "#f0f0f0", padding: "10px 0" }}>
-//     <ul
-//       style={{
-//         listStyleType: "none",
-//         margin: 0,
-//         padding: 0,
-//         overflow: "hidden",
-//       }}
-//     >
-//       <li style={{ float: "left" }}>
-//         <Link to="/">Home</Link>
-//       </li>
-//       {/* Add more navigation links here */}
-//     </ul>
-//   </nav>
-// );
+import styled from 'styled-components';
+import * as types from './pages/constants/pagesTypes';
 
-const Sidebar = () => (
-  <aside style={{ width: "20%", float: "right" }}>
-    <div>Sidebar content</div>
-    {/* Sidebar content goes here */}
-  </aside>
-);
+const PageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+`;
+// //Override jsx prgama function to tell which name every HTML tag gets
+// const withComponentName = (Component, props) => {
+//   const componentName = Component.displayName || Component.name;
+//   return <Component {...props} className={componentName} />;
+// };
+
+// // Set the custom pragma globally
+// React.createElement = withComponentName;
 
 const App = () => {
+  const [Page, setPage] = useState(types.HOMEPAGE);
+  
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  }
+
   return (
     <Router>
-      <div>
-        <NavBar />
-        <div style={{ display: "flex" }}>
-          <main style={{ flexGrow: 1 }}>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/register" element={<Register />} />
-              {/* New route for the Register page */}
-              {/* Define more routes here */}
-            </Routes>
-          </main>
-          <Sidebar />
-        </div>
-      </div>
+      <Layout>
+        <NavBar changeComponent={ handlePageChange } currentPage={ Page }/>
+        <PageWrapper>
+          { pageTypeSelector({type : Page}) }
+        </PageWrapper>
+        </Layout>
     </Router>
   );
 };

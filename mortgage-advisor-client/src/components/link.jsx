@@ -5,19 +5,20 @@ import * as access from "@access";
 
 const StyledLink = styled.a`
     font-size: ${(props) => `${props.size}rem` };
+    font-weight: ${(props) => props.bold ? 700 : 200};
     text-decoration: none;
-    color: access.color('colors.blue05');
+    color: ${() => access.color('colors.blue05')};
     padding-right: ${(props) => `${props.padding}rem` };
 
-    &:hover, &:focus, &:active, &:visited {
+    &:hover, &:focus, &:active, &:visited, &:link {
         text-decoration: none;
-        color: access.color('colors.blue05');
+        color: ${() => access.color('colors.blue05')};
     }
 `;
 
-const Link = ({ href, value, handleClick, size, padding }) => {
+const Link = ({ href, value, handleClick, size, padding, bold }) => {
     return (
-        <StyledLink href= { href } onClick={ handleClick } size={ size } padding={ padding }>
+        <StyledLink href= { "#" } onClick={ handleClick } size={ size } padding={ padding } bold={ bold }>
             { value }
         </StyledLink>
     )

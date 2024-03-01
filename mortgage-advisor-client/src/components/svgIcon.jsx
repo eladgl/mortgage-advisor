@@ -9,7 +9,6 @@ const SvgWrapper = styled.svg`
 `;
 
 const SvgIcon = ({ name, prefix, color, size, ...props }) => {
-    console.log('name ', name);
     const symbolId = `#${name}`;
   
     return (

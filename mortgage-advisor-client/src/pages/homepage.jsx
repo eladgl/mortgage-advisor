@@ -1,6 +1,6 @@
 import React from "react";
 import * as access from "@access";
-const Homepage = () => {
+const HomePage = () => {
   return (
     <div>
       <h1 style={{'color': access.color('colors.blue05')}}>Welcome to Our Website</h1>
@@ -9,4 +9,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;

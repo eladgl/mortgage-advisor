@@ -2,7 +2,7 @@ import React from 'react';
 import * as types from './constants/pagesTypes';
 import * as pageController from './index';
 
-export const pageTypeSelector = ({type}) => {
+export const pageTypeSelector = ({type, rest}) => {
     const mapPages = {
         [types.CHECK_BEST_MORTGAGE]: 'CheckBestMortgage',
         [types.CONTACT_US]: 'ContactUs',
@@ -17,7 +17,6 @@ export const pageTypeSelector = ({type}) => {
         [types.REGISTER]: 'Register',
         [types.UP_TO_100K_LOAN]: 'UpTo100kLoan'
     };
-
     const Component = pageController[mapPages[type]];
     return <Component { ...rest } />;
 };
