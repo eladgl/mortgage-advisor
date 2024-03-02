@@ -1,83 +1,58 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import styled from "styled-components";
 import Link from "./link";
-import { linksConfig } from  "../pages/config/linksConfig";
+import { linksConfig } from "../pages/config/linksConfig";
 import * as access from "@access";
-import * as types from '../pages/constants/pagesTypes';
+import * as types from "../pages/constants/pagesTypes";
+import { useLocation } from "react-router-dom";
 
 import SvgIcon from "./svgIcon";
 
 const RightPane = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 35%;
-    border-left: 1px solid black;
-    height: 70%;
-    justify-content: top;
-    margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid black;
+  height: 100%;
+  justify-content: top;
+  width: 400px;
 `;
 
 const LinkContainer = styled.div`
-    padding-top: 1.2rem;
+  padding-top: 1.2rem;
 `;
 
-const HomeBtn = styled.div`
-    padding: .5rem 3rem 0rem .5rem;
-    width: fit-content;
-    cursor: pointer;
+const NavBar = () => {
+  const location = useLocation();
 
-    &:active {
-        transform: translateX(-1px) translateY(1px);
-    }
-`;
+  const renderLinks = () => {
+    return linksConfig.map((link) => (
+      <LinkContainer key={link.path}>
+        <Link
+          href={link.path}
+          size={link.size}
+          bold={location.pathname === link.path}
+          padding={link.padding}
+          value={link.title}
+          component={link.component}
+        />
+        {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} />}
+      </LinkContainer>
+    ));
+  };
 
-const NavBar = ({changeComponent, currentPage}) => {
-
-    const handleClick = (componentType) => {
-         changeComponent(componentType);
-    };
-
-    const homeBtnClick = () => {
-        changeComponent(types.HOMEPAGE);
-    };
-
-    const renderLinks = () => {
-
-        return linksConfig.map(link => (
-            
-            <LinkContainer key={ link.path }>
-                <Link href={ link.path } 
-                      size={ link.size }
-                      bold = { link.path === currentPage }
-                      padding={ link.padding }
-                      value={ link.title } 
-                      component={ link.component }
-                      handleClick={ () => handleClick(link.component) }/>
-                {link.icon && <SvgIcon name={ access.icon(`icons.${link.icon}`) }/>}
-            </LinkContainer>
-        ));
-    };
-
-    return (
-        <RightPane>
-            <HomeBtn onClick={ homeBtnClick }>
-                <SvgIcon name={ access.icon('icons.home') } size="4"/>
-            </HomeBtn>
-            { renderLinks() }
-        </RightPane>
-    );
+  return <RightPane>{renderLinks()}</RightPane>;
 };
 
 NavBar.propTypes = {
-    changeComponent: PropTypes.func,
-    currentPage: PropTypes.string,
+  changeComponent: PropTypes.func,
+  currentPage: PropTypes.string,
 };
 
 NavBar.defaultProps = {
-    changeComponent: () => null,
-    currentPage: types.HOMEPAGE,
-}
+  changeComponent: () => null,
+  currentPage: types.HOMEPAGE,
+};
 
 export default NavBar;
