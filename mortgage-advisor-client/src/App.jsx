@@ -8,6 +8,7 @@ import NavBar from "./components/navBar";
 import styled from 'styled-components';
 import * as types from './pages/constants/pagesTypes';
 import UserCard from './components/userCard';
+import { linksConfig } from  "./pages/config/linksConfig";
 
 const PageWrapper = styled.div`
   width: 100%;
@@ -30,22 +31,32 @@ const Layout = styled.div`
 // React.createElement = withComponentName;
 
 const App = () => {
-  const [Page, setPage] = useState(types.HOMEPAGE);
+  const [Page, setPage] = useState(window.location.pathname || '/home');
   
   const handlePageChange = (newPage) => {
     setPage(newPage);
-  }
+  };
+
+  const makeRoute = () => (
+    linksConfig.map((link) => 
+      <Route path={link.path} element={pageTypeSelector({type : link.component}, {k:1})}/>
+    )
+  );
 
   return (
-    <Router>
+    <div>
       <UserCard />
       <Layout>
         <NavBar changeComponent={ handlePageChange } currentPage={ Page }/>
         <PageWrapper>
-          { pageTypeSelector({type : Page}) }
+        <Router>
+      <Routes>
+        {makeRoute()}
+      </Routes>
+      </Router>
         </PageWrapper>
         </Layout>
-    </Router>
+    </div>
   );
 };
 

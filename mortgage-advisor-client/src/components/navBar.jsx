@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Routes } from "react-router-dom";
+
 import styled from "styled-components";
 import Link from "./link";
 import { linksConfig } from  "../pages/config/linksConfig";
@@ -50,7 +50,7 @@ const NavBar = ({changeComponent, currentPage}) => {
             <LinkContainer key={ link.path }>
                 <Link href={ link.path } 
                       size={ link.size }
-                      bold = { link.component === currentPage }
+                      bold = { link.path === currentPage }
                       padding={ link.padding }
                       value={ link.title } 
                       component={ link.component }

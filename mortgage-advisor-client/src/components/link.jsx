@@ -19,7 +19,7 @@ const StyledLink = styled.a`
 const Link = ({ href, value, handleClick, size, padding, bold }) => {
 
     return (
-        <StyledLink href= { "#" } onClick={ handleClick } size={ size } padding={ padding } bold={ bold }>
+        <StyledLink href= { href } onClick={ handleClick } size={ size } padding={ padding } bold={ bold }>
             { value }
         </StyledLink>
     )
