@@ -1,61 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/homepage"; 
+import {
+  ContactUs,
+  Over100kLoan,
+  FewLoans,
+  OneLoan,
+  UpTo100kLoan,
+  NormalMortgage,
+  CheckBestMortgage,
+  NewMortgage,
+  HomePage,
+} from "./pages";
 import { pageTypeSelector } from "./pages/pageTypeSelector";
 // import Homepage from "./pages/homepage";
 // import Register from "./pages/register";
 import NavBar from "./components/navBar";
-import styled from 'styled-components';
-import * as types from './pages/constants/pagesTypes';
-import UserCard from './components/userCard';
-import { linksConfig } from  "./pages/config/linksConfig";
-
-const PageWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`
+import styled from "styled-components";
+import "./index.css";
+import TopNavBar from "./components/topNavBar";
 
 const Layout = styled.div`
   display: flex;
   flex-direction: row;
   width: 100vw;
-  height: 100vh;
 `;
-// //Override jsx prgama function to tell which name every HTML tag gets
-// const withComponentName = (Component, props) => {
-//   const componentName = Component.displayName || Component.name;
-//   return <Component {...props} className={componentName} />;
-// };
-
-// // Set the custom pragma globally
-// React.createElement = withComponentName;
 
 const App = () => {
-  const [Page, setPage] = useState(window.location.pathname || '/home');
-  
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
-
-  const makeRoute = () => (
-    linksConfig.map((link) => 
-      <Route path={link.path} element={pageTypeSelector({type : link.component}, {k:1})}/>
-    )
-  );
-
   return (
-    <div>
-      <UserCard />
-      <Layout>
-        <NavBar changeComponent={ handlePageChange } currentPage={ Page }/>
-        <PageWrapper>
-        <Router>
-      <Routes>
-        {makeRoute()}
-      </Routes>
-      </Router>
-        </PageWrapper>
+    <div className="bg-gray-600">
+      <Router>
+        <TopNavBar />
+        <Layout className="mt-28 h-screen">
+          <div className="hidden sm:block">
+            <NavBar />
+          </div>
+          <div className="w-full h-full">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/newMortgage" element={<NewMortgage />} />
+              <Route
+                path="/checkBestMortgage"
+                element={<CheckBestMortgage />}
+              />
+              <Route path="/normalMortgage" element={<NormalMortgage />} />
+              <Route path="/upTo100kLoan" element={<UpTo100kLoan />} />
+              <Route path="/oneLoan" element={<OneLoan />} />
+              <Route path="/fewLoans" element={<FewLoans />} />
+              <Route path="/over100kLoan" element={<Over100kLoan />} />
+              <Route path="/contactUs" element={<ContactUs />} />
+            </Routes>
+          </div>
         </Layout>
+      </Router>
     </div>
   );
 };
