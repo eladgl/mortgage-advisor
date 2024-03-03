@@ -18,23 +18,9 @@ const RegistraionWrapper = styled.section`
 `;
 
 const ItemsWrapper = styled.div`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
 
 `;
 
-const Label = styled.label`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
-`;
-
-const Input = styled.input`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
-`;
 
 const Title = styled.h1`
   font-size: 1.25rem;
@@ -77,6 +63,10 @@ const HtmlFormWrapper = styled.div`
 `;
 
 const Register = () => {
+
+
+
+
   return (
     <RegistraionWrapper>
       <ItemsWrapper>
@@ -85,27 +75,27 @@ const Register = () => {
           <HtmlForm action="#">
             <InputLabelWrapper>
               <ImportantLabel htmlFor="pname" >שם פרטי</ImportantLabel>
-              <Input type="text" name="pname" id="pname" placeholder="שם פרטי" required=""></Input>
+              <Input type="text" name="pname" id="pname" placeholder="שם פרטי" required />
             </InputLabelWrapper>
             <InputLabelWrapper>
               <ImportantLabel htmlFor="lname" >שם משפחה</ImportantLabel>
-              <Input type="text" name="lname" id="lname" placeholder="שם משפחה" required=""></Input>
+              <Input type="text" name="lname" id="lname" placeholder="שם משפחה" required />
             </InputLabelWrapper>
             <InputLabelWrapper>
               <ImportantLabel htmlFor="phoneNumber">מספר טלפון נייד</ImportantLabel>
-              <Input type="tel" name="phoneNumber" id="phoneNumber" placeholder="טלפון" required=""></Input>
+              <Input type="tel" name="phoneNumber" id="phoneNumber" placeholder="טלפון" required />
             </InputLabelWrapper>
             <InputLabelWrapper>
               <ImportantLabel htmlFor="email" >דואר אלקטרוני</ImportantLabel>
-              <Input type="email" name="email" id="email" placeholder="דואר אלקטרוני" required=""></Input>
+              <Input type="email" name="email" id="email" placeholder="דואר אלקטרוני" required />
             </InputLabelWrapper>
             <InputLabelWrapper>
               <ImportantLabel htmlFor="password">סיסמה</ImportantLabel>
-              <Input type="password" name="password" id="password" placeholder="סיסמה" required=""></Input>
+              <Input type="password" name="password" id="password" placeholder="סיסמה" required />
             </InputLabelWrapper>
             <InputLabelWrapper>
               <ImportantLabel htmlFor="rePassword">אישור סיסמה</ImportantLabel>
-              <Input type="password" name="password" id="rePassword" placeholder="סיסמה" required=""></Input>
+              <Input type="password" name="password" id="rePassword" placeholder="סיסמה" required />
             </InputLabelWrapper>
 
             <Button type="submit">יצירת חשבון</Button>
