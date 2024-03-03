@@ -1,14 +1,20 @@
 import React from "react";
 import styled, { css } from 'styled-components';
 
+import { Label, ImportantLabel } from '../components/label';
+import { Input } from '../components/input';
+import { HtmlForm } from '../components/form';
+import { TailWindLink } from '../components/link';
+import { Button } from '../components/button';
+
 const RegistraionWrapper = styled.section`
   width: 100%;
   height: 100%;
   
-  ${props => css`
-    ${props.tailwindClass}
-  `}
-
+  background-color: rgba(0, 0, 0, 0.4);
+  .dark {
+    background-color: #111827;
+  }
 `;
 
 const ItemsWrapper = styled.div`
@@ -31,62 +37,83 @@ const Input = styled.input`
 `;
 
 const Title = styled.h1`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: #1f2937;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  .dark & {
+    color: #ffffff;
+  }
 `;
 
 const InputLabelWrapper = styled.div`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
+
 `;
 
-const Form = styled.div`
-  ${props => css`
-    ${props.tailwindClass}
-  `}
-`;
+const HtmlFormWrapper = styled.div`
+  padding: 1.5rem;
+  padding-top: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 1rem;
 
-const FormWrapper = styled.div`
-  ${props => css`
-      ${props.tailwindClass}
-  `}
+  @media (min-width: 640px) {
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
 `;
 
 const Register = () => {
   return (
-    <RegistraionWrapper tailwindClass="bg-gray-50 dark:bg-gray-900">
-      <ItemsWrapper tailwindClass="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <FormWrapper tailwindClass="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <Title tailwindClass="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">משתמש חדש</Title>
-          <Form tailwindClass="space-y-4 md:space-y-6" action="#">
+    <RegistraionWrapper>
+      <ItemsWrapper>
+        <HtmlFormWrapper>
+          <Title>משתמש חדש</Title>
+          <HtmlForm action="#">
             <InputLabelWrapper>
-              <Label for="pname" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >שם פרטי</Label>
-              <Input type="text" name="pname" id="pname" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="שם פרטי" required=""></Input>
+              <ImportantLabel htmlFor="pname" >שם פרטי</ImportantLabel>
+              <Input type="text" name="pname" id="pname" placeholder="שם פרטי" required=""></Input>
             </InputLabelWrapper>
             <InputLabelWrapper>
-              <Label for="lname" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >שם משפחה</Label>
-              <Input type="text" name="lname" id="lname" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="שם משפחה" required=""></Input>
+              <ImportantLabel htmlFor="lname" >שם משפחה</ImportantLabel>
+              <Input type="text" name="lname" id="lname" placeholder="שם משפחה" required=""></Input>
             </InputLabelWrapper>
             <InputLabelWrapper>
-              <Label for="phoneNumber" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >מספר טלפון נייד</Label>
-              <Input type="tel" name="phoneNumber" id="phoneNumber" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="טלפון" required=""></Input>
+              <ImportantLabel htmlFor="phoneNumber">מספר טלפון נייד</ImportantLabel>
+              <Input type="tel" name="phoneNumber" id="phoneNumber" placeholder="טלפון" required=""></Input>
             </InputLabelWrapper>
             <InputLabelWrapper>
-              <Label for="email" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >דואר אלקטרוני</Label>
-              <Input type="email" name="email" id="email" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="דואר אלקטרוני" required=""></Input>
+              <ImportantLabel htmlFor="email" >דואר אלקטרוני</ImportantLabel>
+              <Input type="email" name="email" id="email" placeholder="דואר אלקטרוני" required=""></Input>
             </InputLabelWrapper>
             <InputLabelWrapper>
-              <Label for="password" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >סיסמה</Label>
-              <Input type="password" name="pname" id="pname" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="סיסמה" required=""></Input>
+              <ImportantLabel htmlFor="password">סיסמה</ImportantLabel>
+              <Input type="password" name="password" id="password" placeholder="סיסמה" required=""></Input>
             </InputLabelWrapper>
             <InputLabelWrapper>
-              <Label for="rePassword" tailwindClass="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >אישור סיסמה</Label>
-              <Input type="rePassword" name="rePassword" id="rePassword" tailwindClass="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="סיסמה" required=""></Input>
+              <ImportantLabel htmlFor="rePassword">אישור סיסמה</ImportantLabel>
+              <Input type="password" name="password" id="rePassword" placeholder="סיסמה" required=""></Input>
             </InputLabelWrapper>
-          </Form>
-        </FormWrapper>
+
+            <Button type="submit">יצירת חשבון</Button>
+            <Label>
+                כבר יש חשבון? <TailWindLink href="/login">התחברות</TailWindLink>
+            </Label>
+          </HtmlForm>
+        </HtmlFormWrapper>
       </ItemsWrapper>
     </RegistraionWrapper>
   );
