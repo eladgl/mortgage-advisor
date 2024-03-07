@@ -14,8 +14,7 @@ import {
   LoginPage,
 } from "./pages";
 import { pageTypeSelector } from "./pages/pageTypeSelector";
-// import Homepage from "./pages/homepage";
-// import Register from "./pages/register";
+
 import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
