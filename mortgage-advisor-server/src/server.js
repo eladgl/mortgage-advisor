@@ -22,7 +22,12 @@ app.get("/test", (req, res) => {
 // Endpoint for registering a new user
 app.post("/register", async (req, res) => {
   try {
-    const userId = await registerUser(req.body); // req.body should contain email, username, password, and any additionalInfo
+    // Ensure the passwords match before proceeding with registration
+    if (req.body.password !== req.body.rePassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    const userId = await registerUser(req.body); // req.body should contain the required fields
     res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
     console.error(error);

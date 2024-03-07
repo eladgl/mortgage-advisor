@@ -27,17 +27,27 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
 // Add a user to Firestore
 async function registerUser(userData) {
-  const { email, username, password, additionalInfo } = userData;
+  const {
+    pname,
+    lname,
+    phoneNumber,
+    email,
+    password,
+    rePassword,
+    ...additionalInfo
+  } = userData;
   // In a real application, ensure you hash the password before storing it.
   const newUserRef = db.collection("users").doc(); // Create a new document reference
 
   await newUserRef.set({
+    pname,
+    lname,
+    phoneNumber,
     email,
-    username,
     password,
+    // Don't store rePassword as it's only for validation
     ...additionalInfo,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
