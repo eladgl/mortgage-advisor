@@ -11,6 +11,7 @@ import {
   NewMortgage,
   HomePage,
   Register,
+  LoginPage,
 } from "./pages";
 import { pageTypeSelector } from "./pages/pageTypeSelector";
 
@@ -18,7 +19,6 @@ import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
 import TopNavBar from "./components/topNavBar";
-
 const Layout = styled.div`
   display: flex;
   flex-direction: row;
@@ -49,6 +49,7 @@ const App = () => {
               <Route path="/over100kLoan" element={<Over100kLoan />} />
               <Route path="/contactUs" element={<ContactUs />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
           </div>
         </Layout>
