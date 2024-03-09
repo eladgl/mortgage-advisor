@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { registerUser, loginUser } from "./db/firebaseConfig.js";
+import { sendMail } from "./utilities/mails.js";
 
 // Create an express application
 const app = express();
@@ -48,6 +49,16 @@ app.post("/login", async (req, res) => {
     console.error(error);
     res.status(401).json({ message: "Login failed", error: error.message });
   }
+});
+
+app.post("/contactUs", (req, res) => {
+  const formData = req.body; // Access form data from the request body
+  // Process the form data, such as saving it to a database or sending it via email
+  console.log("Received form data:", formData);
+  sendMail(formData)
+    .catch(e => console.log(e));
+  // Send a response to the client
+  res.status(200).json({ message: "Form submitted successfully" });
 });
 
 // Start the server
