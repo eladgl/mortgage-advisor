@@ -37,13 +37,12 @@ const GridCell = styled.div`
 `;
 
 const CustomLink = styled(TailWindLink)`
-    margin-right: 8px; /* Add some margin between the checkbox and the link */
+    margin-right: 8px;
 `;
 
 const NormalMortgage = () => {
 
     const renderGrid = () => {
-
         return (
             <div className="grid grid-cols-2 grid-rows-6 gap-6">
                 <GridCell>
@@ -93,6 +92,7 @@ const NormalMortgage = () => {
     };
 
     return (
+
         <Wrapper>
             {renderGrid()}
         </Wrapper>

@@ -15,14 +15,14 @@ const RangeInput = styled(Input)`
 
 const Hint = styled.div`
   position: absolute; 
-  top: 2.9rem;
+  top: 2.4rem;
   left: ${(props) => `${props.left}%`};
   color: white; 
   border: 1px solid blue; 
   border-radius: 50%;
   background-color: #6d6dfe;
   width: max-content;
-  padding: 6px;
+  padding: 5px;
   justify-content: center;
   border-radius: 50%;
   border-top-right-radius: 0;
@@ -32,7 +32,8 @@ const Hint = styled.div`
 const TextInHint = styled.span`
     display: inline-block;
     transform: rotate(45deg);
-    font-size: 10px;
+    font-size: 8px;
+    white-space: nowrap;
 `;
 
 const RangeSlider = ({ minValue, maxValue }) => {
