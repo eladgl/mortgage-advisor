@@ -1,61 +1,93 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import axios from "axios";
+import { Label } from "../components/label";
+import { Input } from "../components/input";
+import { Button } from "../components/button";
+import { TailWindLink } from "../components/link";
 
-const LoginPage = () => {
-  const [loginData, setLoginData] = useState({
+const Wrapper = styled.div`
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 1rem;
+  height: 100%;
+`;
+
+const GridCell = styled.div`
+    
+`;
+
+const TwoCells = styled(GridCell)`
+    grid-column: span 2;
+`;
+
+const Login = () => {
+  const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (e) => {
-    setLoginData({
-      ...loginData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Ensure this matches your server's login endpoint
-      const response = await axios.post(
-        "http://localhost:3001/login",
-        loginData
-      );
+      const response = await axios.post("http://localhost:3001/login", formValues);
       console.log("Login successful:", response.data);
-      alert("Login successful");
-      // Here you could also redirect the user or save the login state
     } catch (error) {
-      console.error("Login error:", error);
-      alert("Failed to login");
+      console.error("Error logging in:", error);
     }
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={loginData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={loginData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
+    <Wrapper>
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 grid-rows-3 gap-8">
+        <TwoCells>
+          <Label htmlFor="email">דואר אלקטרוני:</Label>
+          <Input
+            type="email" 
+            placeholder="דואר אלקטרוני"
+            id="email"
+            name="email"
+            value={formValues.email}
+            onChange={handleInputChange}
+            required
+          />
+        </TwoCells>
+        <TwoCells>
+          <Label htmlFor="password">סיסמה:</Label>
+          <Input
+            type="password"
+            placeholder="סיסמה"
+            id="password"
+            name="password"
+            value={formValues.password}
+            onChange={handleInputChange}
+            required
+          />
+        </TwoCells>
+        <GridCell>
+          <Button type="submit">כניסה</Button>
+        </GridCell>
+        <GridCell />
+        <GridCell>
+          <TailWindLink href='recover'>שיחזור סיסמה</TailWindLink>
+        </GridCell>
+        <GridCell />
+        <GridCell>
+          <Label>
+             {' עדיין לא רשום? '}
+            <TailWindLink href='register'>הרשם</TailWindLink>
+        </Label>
+      </GridCell>
     </form>
+    </Wrapper >
   );
 };
 
-export default LoginPage;
+export default Login;
