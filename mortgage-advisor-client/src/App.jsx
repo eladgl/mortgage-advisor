@@ -11,6 +11,7 @@ import {
   NewMortgage,
   HomePage,
   Register,
+  Recover,
   LoginPage,
 } from "./pages";
 import { pageTypeSelector } from "./pages/pageTypeSelector";
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/over100kLoan" element={<Over100kLoan />} />
               <Route path="/contactUs" element={<ContactUs />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/recover" element={<Recover />} />
               <Route path="/login" element={<LoginPage />} />
             </Routes>
           </div>

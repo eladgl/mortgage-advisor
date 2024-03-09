@@ -72,4 +72,11 @@ export const linksConfig = [
         size: 2,
         padding: 2,
     },
+    {
+        title: 'שחזור חשבון',
+        path: '/recover',
+        component: 'Recover',
+        size: 1,
+        padding: 2,
+    },
 ]
