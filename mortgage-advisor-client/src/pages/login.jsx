@@ -50,7 +50,7 @@ const Login = () => {
         <TwoCells>
           <Label htmlFor="email">דואר אלקטרוני:</Label>
           <Input
-            type="email"
+            type="email" 
             placeholder="דואר אלקטרוני"
             id="email"
             name="email"
