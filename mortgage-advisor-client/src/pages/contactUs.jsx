@@ -83,10 +83,10 @@ const ContactUs = () => {
       try {
         // Make a GET request to the server using axios
         const response = await axios.get("http://localhost:3001/test");
-        setMessage(response.data.message); // Access data directly from axios response
+        console.log(response.data.message); // Access data directly from axios response
       } catch (error) {
         console.error("Error fetching data: ", error);
-        setMessage("Failed to connect to server");
+        console.log("Failed to connect to server");
       }
     };
 
