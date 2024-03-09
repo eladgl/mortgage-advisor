@@ -77,4 +77,18 @@ async function loginUser(email, password) {
   }
 }
 
-export { admin, registerUser, loginUser };
+async function getUserPassword(email) {
+  try {
+    const userDoc = await db.collection("users").doc(email).get();
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+      return userData.password;
+    } else {
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { admin, registerUser, loginUser, getUserPassword };

@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { registerUser, loginUser } from "./db/firebaseConfig.js";
+import { registerUser, loginUser, getUserPassword } from "./db/firebaseConfig.js";
 import { sendMail } from "./utilities/mails.js";
 
 // Create an express application
@@ -59,6 +59,23 @@ app.post("/contactUs", (req, res) => {
     .catch(e => console.log(e));
   // Send a response to the client
   res.status(200).json({ message: "Form submitted successfully" });
+});
+
+app.post("/recover", async (req, res) => {
+  const { email } = req.body;
+  console.log(email)
+  try {
+    // Fetch user's password from the database
+    const password = await getUserPassword(email);
+
+    // Send password via email
+    await sendMail({ email, password });
+
+    res.status(200).json({ message: "Password sent successfully to user's email" });
+  } catch (error) {
+    console.error("Error sending password:", error);
+    res.status(500).json({ message: "Failed to send password", error: error.message });
+  }
 });
 
 // Start the server
