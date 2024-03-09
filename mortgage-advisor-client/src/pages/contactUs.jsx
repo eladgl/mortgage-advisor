@@ -40,10 +40,10 @@ const ContactUs = () => {
 
   const [formValues, setFormValues] = useState({
     fname: '',
-    lname: 0,
+    lname: '',
     phone: '',
     email: '',
-    reason: false,
+    reason: '',
     contactMessage: '',
   });
 
