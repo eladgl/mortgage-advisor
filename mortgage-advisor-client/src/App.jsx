@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   ContactUs,
@@ -16,12 +16,11 @@ import {
 } from "./pages";
 import { pageTypeSelector } from "./pages/pageTypeSelector";
 
-import Accessibilik from 'accessibility-react-widget';
-
 import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
 import TopNavBar from "./components/topNavBar";
+import HiddenRibbon from "./components/hiddenRibbon";
 
 const Layout = styled.div`
   display: flex;
@@ -30,11 +29,11 @@ const Layout = styled.div`
 `;
 
 const App = () => {
+
   return (
     <div className="bg-gray-600">
       <Router>
         <TopNavBar />
-            <Accessibilik />
         <Layout className="mt-28 h-screen">
           <div className="hidden sm:block">
             <NavBar />

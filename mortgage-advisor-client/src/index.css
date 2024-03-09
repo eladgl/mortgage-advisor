@@ -12,6 +12,10 @@
 html {
   font-size: 62.5%; /* 10px */
 }
+
+#NagishLiLogo{
+  color: white;
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -1,0 +1,23 @@
+-----------------------------------------------------
+NagishLi - A free accessibility plugin from Localize*
+-----------------------------------------------------
+
+I'm glad that you decided to use NagishLi to make your website more accessible.
+NagishLi is growing steadily and will keep improving - many thanks to you and your choice to use it.
+
+I recommend you to check out the installation code generator file (inside the folder docs -> english -> install) so you'll be able to create a code you can easily place in your website.
+
+To keep getting the latest news about NagishLi, it is also recommended to signup for the newsletter at:
+http://nagish.li/en/newsletter.html
+
+If you want to make suggestions, report bugs etc, you can send a message at:
+http://nagish.li/en/contact.html
+
+NagishLi is free to download. If you're interested in donating to support its continued developement, visit:
+http://nagish.li/en/donate.html
+
+Thank you for choosing NagishLi!
+
+
+Kind regards,
+Dan Ya'akov | Localize*
