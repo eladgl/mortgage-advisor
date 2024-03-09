@@ -79,16 +79,43 @@ async function loginUser(email, password) {
 
 async function getUserPassword(email) {
   try {
-    const userDoc = await db.collection("users").doc(email).get();
-    if (userDoc.exists) {
-      const userData = userDoc.data();
-      return userData.password;
-    } else {
-      throw new Error("User not found");
+    const usersRef = db.collection("users");
+    const snapshot = await usersRef.where("email", "==", email).get();
+
+    if (snapshot.empty) {
+      console.error("User not found");
+      return null; // or any other value to indicate user not found
     }
+
+    const userDoc = snapshot.docs[0];
+    const userData = userDoc.data();
+    console.log(userData.password);
+    return userData.password;
   } catch (error) {
-    throw error;
+    console.error("Error retrieving password:", error);
+    return null; // or any other value to indicate an error occurred
+  }
+};
+
+
+async function printUsers() {
+  try {
+    const usersRef = db.collection("users");
+    const snapshot = await usersRef.get();
+
+    if (snapshot.empty) {
+      console.log("No users found");
+      return;
+    }
+
+    snapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
   }
 }
+printUsers();
+getUserPassword('eladgiving1@gmail.com');
 
-export { admin, registerUser, loginUser, getUserPassword };
+export { admin, registerUser, loginUser, getUserPassword, printUsers };

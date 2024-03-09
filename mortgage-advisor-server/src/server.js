@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { registerUser, loginUser, getUserPassword } from "./db/firebaseConfig.js";
-import { sendMail } from "./utilities/mails.js";
+import { sendMail, recoverMail } from "./utilities/mails.js";
 
 // Create an express application
 const app = express();
@@ -69,7 +69,7 @@ app.post("/recover", async (req, res) => {
     const password = await getUserPassword(email);
 
     // Send password via email
-    await sendMail({ email, password });
+    await recoverMail({ email, password });
 
     res.status(200).json({ message: "Password sent successfully to user's email" });
   } catch (error) {
