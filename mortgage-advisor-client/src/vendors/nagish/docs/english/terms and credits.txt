@@ -1,0 +1,29 @@
+/* * * * * * * * * * * * * * * * * * * *
+*
+* NagishLi Copyright (c) 2016-now Localize* (http://www.nagish.li)
+
+! This program is free software: you can redistribute it and/or modify
+! it under the terms of the GNU Lesser General Public License as published by
+! the Free Software Foundation, either version 3 of the License, or
+! (at your option) any later version.
+!
+! This program is distributed in the hope that it will be useful,
+! but WITHOUT ANY WARRANTY; without even the implied warranty of
+! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+! GNU Lesser General Public License for more details.
+!
+! You should have received a copy of the GNU Lesser General Public License
+! along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+! People & Disability Pictograms Copyright (c) 2016 anatom5 GmbH in cooperation with Natko (http://www.anatom5.de & http://www.natko.de)
+! Balloon.css Copyright (c) 2016 Claudio Holanda (https://kazzkiq.github.io/balloon.css/)
+! Normalize.css Copyright (c) Nicolas Gallagher and Jonathan Neal (https://necolas.github.io/normalize.css/)
+! Styling inspired by Pedro Nauk (https://codepen.io/pedronauck/)
+! Arrows icons from Flaticon by Dave Gandy (http://www.flaticon.com/authors/dave-gandy)
+! Star Of David icon from Flaticon by Scott de Jonge (http://www.flaticon.com/authors/scott-de-jonge)
+! Bounce animations from Animate.css Copyright (c) 2016 Daniel Eden (https://daneden.github.io/animate.css/)
+! Various icons (Cursor, audio ..) from Icons8 (https://icons8.com)
+! Hotkeys Copyright (c) 2015 Kenny Wong (https://github.com/jaywcjlove/hotkeys/)
+
+*
+* * * * * * * * * * * * * * * * * * * */

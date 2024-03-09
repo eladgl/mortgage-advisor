@@ -1,0 +1,8 @@
+How to install
+--------------
+To create the installation code for NagishLi, you can use the file 'installation code generator' found inside the 'install' folder.
+Installation instructions can also be found at http://nagish.li/install.html
+
+How to upgrade
+--------------
+To upgrade NagishLi, the most recommended way is just to delete it and all its associated files (usually inside the folder 'nl-files'), and then upload all the files of the newer version.

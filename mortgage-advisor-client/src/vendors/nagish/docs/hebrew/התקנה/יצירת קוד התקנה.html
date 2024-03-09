@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he">
+	<head>
+		<title>נגיש לי 2: יצירת קוד התקנה</title>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Dan Ya'akov" />
+		<meta name="url" content="http://www.localize.co.il" />
+		<meta name="copyright" content="Localize" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+
+	<body>
+
+		<div class="title">יצירת קוד התקנה עבור נגיש לי 2</div>
+		<p class="text">תודה שבחרתם בנגיש לי!<br />הקובץ הזה יסייע לכם ליצור קוד התקנה בקלות שאותו תוכלו לשתול ישירות באתר שלכם. התאימו את ההגדרות לפי רצונכם ולסיום לחצו על 'יצירת קוד'. אם אינכם בטוחים לגבי הגדרה מסוימת וזקוקים להסבר נוסף, אתם יכולים ללחוץ על <span class="help" onclick="alert(msgs.info);">&#x2753;</span> לצד ההגדרה.<br /><b>שימו לב - קוד ההתקנה צריך להיות ממוקם בדיוק לפני תג <span class="ltr">&lt;/body&gt;</span>.</b> בהצלחה!</p>
+		<div><label for="url"><span class="help" onclick="alert(msgs.url);">&#x2753;</span> מיקום הקובץ של נגיש לי בתוך האתר שלכם:</label> <span dir="ltr"><input type="text" id="url" />/nagishli.js</span></div>
+		<div><label for="version"><span class="help" onclick="alert(msgs.ver);">&#x2753;</span> הגירסה של נגיש לי שאותה אתם מתקינים (לדוגמה, 2.2.2):</label> <input type="text" maxlength="5" id="version" /></div>
+		<div><label for="language">שפה:</label> <select id="language"><option value="default">עברית</option><option value="en">אנגלית</option></select></div>
+		<div><label for="position">מיקום במסך:</label> <select id="position"><option value="default">פינה שמאלית עליונה</option><option value="bl">פינה שמאלית תחתונה</option><option value="tr">פינה ימנית עליונה</option><option value="br">פינה ימנית תחתונה</option></select></div>
+		<div>
+			<label for="statement"><span class="help" onclick="alert(msgs.statement);">&#x2753;</span> הצהרת נגישות (אם יש, הזינו קישור ישיר אליה):</label> <input type="text" id="statement" />
+		</div>
+		<div>
+			<label for="color">צבע:</label> <select id="color"><option value="default">כחול</option><option value="red">אדום</option><option value="green">ירוק</option><option value="purple">סגול</option><option value="yellow">צהוב</option><option value="pink">ורוד</option><option value="gray">אפור</option><option value="brown">חום</option><option value="orange">כתום</option><option value="turquoise">טורקיז</option><option value="black">שחור</option></select>
+		</div>
+		<div>
+			 <label for="compact"><span class="help" onclick="alert(msgs.compact);">&#x2753;</span> מצב קומפקטי:</label> <select id="compact"><option value="0">לא</option><option value="1">כן</option></select>
+		</div>
+		<div>
+			<label for="accordion"><span class="help" onclick="alert(msgs.accordion);">&#x2753;</span> מצב אקורדיון:</label> <select id="accordion"><option value="0">לא</option><option value="1">כן</option></select>
+		</div>
+		<div><label for="license"><a href="http://nagish.li/license.html" target="_blank">רישיון</a> (אם יש, הזינו את הקוד):</label> <input type="text" id="license" /></div>
+		<div><label for="directory"><span class="help" onclick="alert(msgs.dir);">&#x2753;</span> מיקום תיקיית קובצי התוסף:</label> <input type="text" id="directory" /></div>
+		<div>
+			<span class="help" onclick="alert(msgs.contact);">&#x2753;</span> פרטים עבור הצהרת הנגישות המובנית:
+			<div class="sub"><label for="name">שם:</label> <input type="text" id="name" /></div>
+			<div class="sub"><label for="phone">טלפון:</label> <input type="text" id="phone" /></div>
+			<div class="sub"><label for="email">דואר אלקטרוני:</label> <input type="text" id="email" /></div>
+			<div class="sub"><label for="fax">פקס:</label> <input type="text" id="fax" /></div>
+		</div>
+		<div><button onclick="generateCode()">יצירת קוד</button></div>
+		<div class="hide"><textarea id="nagishli-code"></textarea></div>
+		<div class="bottom">&copy; 2016-<script>document.write(new Date().getFullYear());</script> <a href="http://www.nagish.li" target="_blank" class="product">נגיש לי</a> -  תוסף נגישות בחינם לבעלי אתרים מבית <a href="http://www.localize.co.il" target="_blank" class="developer">לוקלייז*</a></div>
+
+		<script src="functions.js" charset="utf-8"></script>
+	</body>
+
+</html>
