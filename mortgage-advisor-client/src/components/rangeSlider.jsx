@@ -36,7 +36,7 @@ const TextInHint = styled.span`
     white-space: nowrap;
 `;
 
-const RangeSlider = ({ minValue, maxValue }) => {
+const RangeSlider = ({ minValue, maxValue, handleRangeChange, name, id }) => {
     const [value, setValue] = useState(0);
     const [hintPosition, setHintPosition] = useState(0);
     const rangeRef = useRef(null);
@@ -46,6 +46,7 @@ const RangeSlider = ({ minValue, maxValue }) => {
         const val = parseInt(event.target.value);
         setValue(val);
         updatePosition(val);
+        handleRangeChange(event);
     };
 
     const updatePosition = (val) => {
@@ -67,12 +68,14 @@ const RangeSlider = ({ minValue, maxValue }) => {
         <RangeWrapper className="range-slider">
             <Label>{minValue}</Label>
             <RangeInput
+                id={ id }
+                name={ name }
                 type="range"
                 min={minValue}
                 max={maxValue}
                 ref={rangeRef}
                 value={value}
-                onChange={handleChange} />
+                onChange={ handleChange } />
             <Hint ref={hintRef} left={hintPosition}>
                 <TextInHint>{`${value}₪`}</TextInHint>
             </Hint>

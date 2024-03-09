@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Button = styled.button`
   width: 100%;
@@ -25,5 +25,12 @@ export const Button = styled.button`
 .dark &:focus {
   background-color: #4b5563;
 }
+
+${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+      opacity: 0.7;
+    `}
 
 `;
