@@ -1,10 +1,9 @@
 import React, { useState }  from 'react';
-
+import PropTypes from "prop-types";
 import styled from 'styled-components';
 
 const SelectWrapper = styled.div`
     position: relative;  
-    width: fit-content;
 `;
 
 const Select = ({ options, handleSelectChange, id, name }) => {
@@ -27,6 +26,7 @@ const Select = ({ options, handleSelectChange, id, name }) => {
         <SelectWrapper id="dropdown">
             <select 
                 id={ id }
+                style={{width: '100%'}}
                 name={ name }
                 value={selectedValue}
                 onChange={ handleChange }
@@ -37,5 +37,19 @@ const Select = ({ options, handleSelectChange, id, name }) => {
         </SelectWrapper>
     );
 };
+
+Select.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    handleSelectChange: PropTypes.func,
+  };
+
+  Select.defaultProps = {
+    id: "",
+    name: "",
+    handleSelectChange: () => null,
+    options: [''],
+  };
 
 export default Select;
