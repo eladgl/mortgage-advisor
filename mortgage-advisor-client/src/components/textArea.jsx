@@ -8,6 +8,13 @@ const TextAreaWrapper = styled.div`
     position: relative;  
 `;
 
+const StyledTextArea = styled.textarea`
+    resize: none;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+`;
+
 const TextArea = ({ handleTextAreaChange, id, name, required, labelText }) => {
     const renderLabel = () => (
         required ? <ImportantLabel for={name}>{labelText}</ImportantLabel> 
@@ -23,14 +30,14 @@ const TextArea = ({ handleTextAreaChange, id, name, required, labelText }) => {
     return (
         <TextAreaWrapper id="textArea">
             { renderLabel() }
-            <textarea
+            <StyledTextArea
                 id={id}
                 name={name}
                 rows="4"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="נושא הפנייה"
                 onChange={handleTextAreaChange}>
-            </textarea>
+            </StyledTextArea>
         </TextAreaWrapper>
     );
 };
