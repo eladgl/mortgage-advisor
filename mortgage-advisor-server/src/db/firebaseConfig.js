@@ -115,7 +115,5 @@ async function printUsers() {
     console.error("Error fetching users:", error);
   }
 }
-printUsers();
-getUserPassword('eladgiving1@gmail.com');
 
 export { admin, registerUser, loginUser, getUserPassword, printUsers };

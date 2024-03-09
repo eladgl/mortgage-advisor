@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { ImportantLabel, Label } from "../components/label";
+import { Label } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
+import { TailWindLink } from "../components/link";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -45,36 +46,47 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 grid-rows-1 gap-8">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 grid-rows-3 gap-8">
         <TwoCells>
-        <Label htmlFor="email">דואר אלקטרוני:</Label>
-        <Input
-          type="email"
-          placeholder="דואר אלקטרוני"
-          id="email"
-          name="email"
-          value={formValues.email}
-          onChange={handleInputChange}
-          required
-        />
+          <Label htmlFor="email">דואר אלקטרוני:</Label>
+          <Input
+            type="email"
+            placeholder="דואר אלקטרוני"
+            id="email"
+            name="email"
+            value={formValues.email}
+            onChange={handleInputChange}
+            required
+          />
         </TwoCells>
         <TwoCells>
-        <Label htmlFor="password">סיסמה:</Label>
-        <Input
-          type="password"
-          placeholder="סיסמה"
-          id="password"
-          name="password"
-          value={formValues.password}
-          onChange={handleInputChange}
-          required
-        />
+          <Label htmlFor="password">סיסמה:</Label>
+          <Input
+            type="password"
+            placeholder="סיסמה"
+            id="password"
+            name="password"
+            value={formValues.password}
+            onChange={handleInputChange}
+            required
+          />
         </TwoCells>
         <GridCell>
-        <Button type="submit">כניסה</Button>
+          <Button type="submit">כניסה</Button>
         </GridCell>
-      </form>
-    </Wrapper>
+        <GridCell />
+        <GridCell>
+          <TailWindLink href='recover'>שיחזור סיסמה</TailWindLink>
+        </GridCell>
+        <GridCell />
+        <GridCell>
+          <Label>
+             {' עדיין לא רשום? '}
+            <TailWindLink href='register'>הרשם</TailWindLink>
+        </Label>
+      </GridCell>
+    </form>
+    </Wrapper >
   );
 };
 

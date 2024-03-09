@@ -48,5 +48,5 @@ export async function recoverMail({ email, password }) {
         subject: 'Recover Password',
         html: html // Pass the constructed HTML content as the email body
     });
-    console.log(`Message sent: ${info?.messageId}`);
+    console.log(`Message sent: ${info?.messageId} to email: ${email}`);
 };

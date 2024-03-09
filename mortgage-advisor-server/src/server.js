@@ -63,7 +63,6 @@ app.post("/contactUs", (req, res) => {
 
 app.post("/recover", async (req, res) => {
   const { email } = req.body;
-  console.log(email)
   try {
     // Fetch user's password from the database
     const password = await getUserPassword(email);
