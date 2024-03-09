@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   background-color: white;
   border-radius: 1rem;
+  height: 100%;
 
   @media (min-width: 640px) {
     padding: 2rem;
@@ -36,7 +37,7 @@ const TwoCells = styled(GridCell)`
 const reasons = ['אופציה אחרת', 'התייעצות', 'גובה הלוואה'];
 
 const ContactUs = () => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('0');
 
   const [formValues, setFormValues] = useState({
     fname: '',
@@ -59,6 +60,17 @@ const ContactUs = () => {
 
     setIsFormValid(isFormValid);
   }, [formValues]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/contactUs", formValues);
+      setMessage("success");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setMessage("failure");
+    }
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -151,12 +163,26 @@ const ContactUs = () => {
     );
   };
 
-  return (
-    <Wrapper>
-      <Title>טופס יצירת קשר</Title>
-      {renderGrid()}
-    </Wrapper>
-  );
+
+  if (message === 'success')
+    return (
+      <Wrapper >
+        <Title>בקשתך התקבלה ניצור איתך קשר בהקדם</Title>
+      </Wrapper>
+    );
+  else {
+    if (message === 'failure') {
+      alert('בקשה נכשלה, בבקשה תנסה שוב מאוחר יותר');
+    }
+    return (
+      <Wrapper>
+        <Title>טופס יצירת קשר</Title>
+        <form onSubmit={handleSubmit}>
+          {renderGrid()}
+        </form>
+      </Wrapper>
+    );
+  }
 };
 
 export default ContactUs;

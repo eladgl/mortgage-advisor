@@ -50,6 +50,14 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/contactUs", (req, res) => {
+  const formData = req.body; // Access form data from the request body
+  // Process the form data, such as saving it to a database or sending it via email
+  console.log("Received form data:", formData);
+  // Send a response to the client
+  res.status(200).json({ message: "Form submitted successfully" });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
