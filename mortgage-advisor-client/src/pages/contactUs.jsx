@@ -55,6 +55,7 @@ const ContactUs = () => {
       formValues.fname !== '' &&
       formValues.lname !== '' &&
       formValues.phone !== '' &&
+      formValues.email !== '' &&
       formValues.reason !== '' &&
       formValues.contactMessage !== '';
 
