@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   background-color: white;
   border-radius: 1rem;
+  height: 100%;
 
   @media (min-width: 640px) {
     padding: 2rem;
@@ -39,6 +40,8 @@ const GridCell = styled.div`
 const CustomLink = styled(TailWindLink)`
     margin-right: 8px;
 `;
+
+
 
 const NormalMortgage = () => {
     const [formValues, setFormValues] = useState({
@@ -72,7 +75,7 @@ const NormalMortgage = () => {
 
     const renderGrid = () => {
         return (
-            <div className="grid grid-cols-2 grid-rows-6 gap-6">
+            <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around">
                 <GridCell>
                     <ImportantLabel htmlFor="bankName">שם בנק שבו מתהל חשבונך</ImportantLabel>
                     <Input
