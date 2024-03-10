@@ -20,7 +20,6 @@ import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
 import TopNavBar from "./components/topNavBar";
-import HiddenRibbon from "./components/hiddenRibbon";
 
 const Layout = styled.div`
   display: flex;
