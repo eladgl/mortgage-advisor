@@ -39,7 +39,7 @@ const StyledLink = styled(RouterLink)`
   }
 `;
 
-const Link = ({ href, value, handleClick, size, padding, bold }) => {
+const Link = ({ href, value, handleClick, size, padding, bold  }) => {
   return (
     <StyledLink
       to={href}

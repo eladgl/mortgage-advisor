@@ -34,12 +34,12 @@ const NavBar = () => {
         <Link
           href={link.path}
           size={link.size}
-          bold={location.pathname === link.path}
+          bold={location.pathname === link.path || location.pathname === link.secondaryPath}
           padding={link.padding}
           value={link.title}
           component={link.component}
         />
-        {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} color={'#fff'} />}
+        {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} />}
       </LinkContainer>
     ));
   };
