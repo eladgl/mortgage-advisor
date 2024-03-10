@@ -39,7 +39,7 @@ const NavBar = () => {
           value={link.title}
           component={link.component}
         />
-        {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} />}
+        {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} color={'#fff'} />}
       </LinkContainer>
     ));
   };

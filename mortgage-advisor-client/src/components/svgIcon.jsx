@@ -12,7 +12,7 @@ const SvgIcon = ({ name, prefix, color, size, ...props }) => {
     const symbolId = `#${name}`;
   
     return (
-      <SvgWrapper {...props} aria-hidden="false" size={size}>
+      <SvgWrapper {...props} aria-hidden="false" size={size} color={ color }>
         <use href={symbolId} fill={color} />
       </SvgWrapper>
     );
