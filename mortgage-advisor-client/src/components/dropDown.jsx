@@ -70,7 +70,7 @@ const DropDown = ({ dropDownLinks, user }) => {
                 to={link.path}
                 className=" block px-4 py-4 sm:py-2 text-lg sm:text-sm text-gray-50 hover:bg-gray-50 hover:text-black border-b-2 border-gray-500"
                 role="menuitem"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", backgroundColor: '#041a32', color: '#fff', zIndex: 900000 }}
               >
                 {link.name}
               </Link>
@@ -81,7 +81,7 @@ const DropDown = ({ dropDownLinks, user }) => {
                 onClick={() => {
                   handleLogOut(navigate);
                 }}
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", backgroundColor: '#041a32', color: '#fff', zIndex: 900000 }}
               >
                 התנתקות
               </button>
