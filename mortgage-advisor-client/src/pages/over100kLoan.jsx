@@ -1,7 +1,8 @@
 import React from "react";
+import ContactUs from './contactUs';
 
 const Over100kLoan = () => {
-    return <p>Over100kLoan</p>
+    return <ContactUs />
 };
 
 export default Over100kLoan;
