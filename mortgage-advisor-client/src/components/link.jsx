@@ -17,12 +17,17 @@ export const TailWindLink = styled.a`
   }
 `;
 
+export const MainLink = styled(TailWindLink)`
+  color: #fff
+`
+
 const StyledLink = styled(RouterLink)`
   font-size: ${(props) => `${props.size}rem`};
   font-weight: ${(props) => (props.bold ? 800 : 100)};
   text-decoration: none;
   color: ${() => access.color("colors.blue05")};
   padding-right: ${(props) => `${props.padding}rem`};
+  border-bottom: 1px solid gray;
 
   &:hover,
   &:focus,
@@ -30,7 +35,7 @@ const StyledLink = styled(RouterLink)`
   &:visited,
   &:link {
     text-decoration: none;
-    color: ${() => access.color("colors.blue05")};
+    color: ${() => access.color("colors.white")};
   }
 `;
 

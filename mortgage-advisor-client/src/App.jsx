@@ -25,12 +25,19 @@ const Layout = styled.div`
   display: flex;
   flex-direction: row;
   width: 100vw;
+  height: 100vh;
 `;
+
+const Wrapper = styled.div`
+  background-image: 
+    linear-gradient(161deg, #265ca5, #0e346b);
+`;
+
 
 const App = () => {
 
   return (
-    <div className="bg-gray-600">
+    <Wrapper>
       <Router>
         <TopNavBar />
         <Layout className="mt-28 h-screen">
@@ -58,7 +65,7 @@ const App = () => {
           </div>
         </Layout>
       </Router>
-    </div>
+    </Wrapper>
   );
 };
 

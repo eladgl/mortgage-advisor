@@ -21,6 +21,8 @@ const RightPane = styled.div`
 
 const LinkContainer = styled.div`
   padding-top: 1.2rem;
+  display: flex;
+  flex-direction: row;
 `;
 
 const NavBar = () => {
