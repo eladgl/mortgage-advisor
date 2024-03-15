@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 const RegistrationWrapper = styled.section`
   width: 100%;
   height: 100%;
+  padding: 2rem;
   background-color: rgba(0, 0, 0, 0.4);
   .dark {
     background-color: #111827;
@@ -40,7 +41,17 @@ const Title = styled.h1`
     color: #ffffff;
   }
 `;
-
+const PageTitle = styled.h1`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+const ErrorMessage = styled.div`
+  color: red;
+  margin-bottom: 1rem;
+`;
 const InputLabelWrapper = styled.div`
   margin-bottom: 1rem;
 `;
@@ -55,6 +66,8 @@ const Register = () => {
     rePassword: "",
   });
   const { login } = useAuth();
+  const [errorMessages, setErrorMessages] = useState({});
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -62,8 +75,49 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!formData.pname.trim()) {
+      errors.pname = "שם פרטי הינו שדה חובה";
+      isValid = false;
+    }
+
+    if (!formData.lname.trim()) {
+      errors.lname = "שם משפחה הינו שדה חובה";
+      isValid = false;
+    }
+
+    const phoneRegex = /^(\+\d{1,3})?\d{10}$/;
+    if (!formData.phoneNumber.match(phoneRegex)) {
+      errors.phoneNumber = "מספר טלפון לא נכון, חייב להיות באורך 10 ספרות";
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.match(emailRegex)) {
+      errors.email = "כתובת אימייל שגויה";
+      isValid = false;
+    }
+
+    if (formData.password.length < 6) {
+      errors.password = "סיסמא צריכה להיות ארוכה מ6 תוים";
+      isValid = false;
+    }
+
+    if (formData.password !== formData.rePassword) {
+      errors.rePassword = "אישור סיסמא לא זהה לסיסמא";
+      isValid = false;
+    }
+
+    setErrorMessages(errors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     try {
       const response = await axios.post(
         "http://localhost:3001/register",
@@ -79,6 +133,8 @@ const Register = () => {
   return (
     <RegistrationWrapper>
       <HtmlFormWrapper>
+        <PageTitle>דף הרשמה</PageTitle>
+
         <form onSubmit={handleSubmit}>
           <Title>משתמש חדש</Title>
 
@@ -91,8 +147,10 @@ const Register = () => {
               placeholder="שם פרטי"
               value={formData.pname}
               onChange={handleChange}
-              required
             />
+            {errorMessages.pname && (
+              <ErrorMessage>{errorMessages.pname}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <InputLabelWrapper>
@@ -104,8 +162,10 @@ const Register = () => {
               placeholder="שם משפחה"
               value={formData.lname}
               onChange={handleChange}
-              required
             />
+            {errorMessages.lname && (
+              <ErrorMessage>{errorMessages.lname}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <InputLabelWrapper>
@@ -119,21 +179,24 @@ const Register = () => {
               placeholder="טלפון"
               value={formData.phoneNumber}
               onChange={handleChange}
-              required
             />
+            {errorMessages.phoneNumber && (
+              <ErrorMessage>{errorMessages.phoneNumber}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <InputLabelWrapper>
             <ImportantLabel htmlFor="email">דואר אלקטרוני</ImportantLabel>
             <Input
-              type="email"
               name="email"
               id="email"
               placeholder="דואר אלקטרוני"
               value={formData.email}
               onChange={handleChange}
-              required
             />
+            {errorMessages.phoneNumber && (
+              <ErrorMessage>{errorMessages.email}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <InputLabelWrapper>
@@ -145,8 +208,10 @@ const Register = () => {
               placeholder="סיסמה"
               value={formData.password}
               onChange={handleChange}
-              required
             />
+            {errorMessages.password && (
+              <ErrorMessage>{errorMessages.password}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <InputLabelWrapper>
@@ -158,11 +223,17 @@ const Register = () => {
               placeholder="אישור סיסמה"
               value={formData.rePassword}
               onChange={handleChange}
-              required
             />
+            {errorMessages.rePassword && (
+              <ErrorMessage>{errorMessages.rePassword}</ErrorMessage>
+            )}
           </InputLabelWrapper>
 
           <Button type="submit">יצירת חשבון</Button>
+          {errorMessages.form && (
+            <ErrorMessage>{errorMessages.form}</ErrorMessage>
+          )}
+
           <Label>
             כבר יש חשבון? <TailWindLink href="/login">התחברות</TailWindLink>
           </Label>
