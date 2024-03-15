@@ -70,7 +70,12 @@ const getIcon = (path) => {
   return getNested('icons', path);
 };
 
+const getGeneral = (path) => {
+  return getNested('general', path);
+};
+
 export const icon = memo(getIcon);
 export const color = memo(getColor);
+export const general = memo(getGeneral);
 
 

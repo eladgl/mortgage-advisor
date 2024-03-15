@@ -25,10 +25,10 @@ const HtmlFormWrapper = styled.div`
   background-color: white;
   border-radius: 1rem;
 
-  @media (min-width: 640px) {
-    padding: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  @media  (min-width: 640px){
+    padding: 0 2rem;
+    margin-top:  0 2rem;;
+    margin-bottom:  0 2rem;;
   }
 `;
 

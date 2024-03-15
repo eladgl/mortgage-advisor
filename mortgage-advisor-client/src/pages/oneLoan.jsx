@@ -9,6 +9,8 @@ import RangeSlider from "../components/rangeSlider";
 import { TailWindLink } from "../components/link";
 import { Button } from "../components/button";
 
+import * as access from "@access";
+
 const Wrapper = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -18,9 +20,9 @@ const Wrapper = styled.div`
   height: 100%;
 
   @media (min-width: 640px) {
-    padding: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    padding: 0 2rem;
+    margin-top:  0 2rem;;
+    margin-bottom:  0 2rem;;
   }
 `;
 
@@ -29,9 +31,6 @@ const HorizontalWrapper = styled.div`
     flex-direction: row;
     align-items: center;
 `;
-
-const citizenships = ['ישראלית', 'אמריקאית', 'אירופאית'];
-const payBackMethod = ['ריבית פריים', 'ריבית קבועה צמודה למדד', 'ריבית קבועה לא צמודה'];
 
 const GridCell = styled.div`
     
@@ -83,13 +82,13 @@ const OneLoan = () => {
             <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around">
                 <GridCell>
                     <ImportantLabel htmlFor="bankName">שם בנק שבו מתהל חשבונך</ImportantLabel>
-                    <Input
-                        type="text"
+                    <Select
                         name="bankName"
                         id="bankName"
                         placeholder="לחץ כדי לבחור"
+                        options={ access.general('lists.bankNames') } 
                         value={formValues.bankName}
-                        onChange={handleInputChange}
+                        handleSelectChange={ handleInputChange }
                         required />
                 </GridCell>
                 <GridCell>
@@ -108,7 +107,7 @@ const OneLoan = () => {
                     <Select 
                         id="payBackMethod" 
                         name="payBackMethod" 
-                        options={ payBackMethod } 
+                        options={ access.general('lists.payBackMethod') } 
                         value={ formValues.payBackMethod }
                         handleSelectChange={ handleInputChange } />
                 </GridCell>
@@ -117,7 +116,7 @@ const OneLoan = () => {
                     <Select 
                         id="citizenship" 
                         name="citizenship" 
-                        options={citizenships} 
+                        options={ access.general('lists.citizenships') } 
                         value={formValues.citizenship}
                         handleSelectChange={ handleInputChange } />
                 </GridCell>

@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   height: 100%;
 
   @media (min-width: 640px) {
-    padding: 2rem;
+    padding: 0 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
