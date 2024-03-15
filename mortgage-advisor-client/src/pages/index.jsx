@@ -10,3 +10,4 @@ export { default as Over100kLoan } from "./over100kLoan";
 export { default as Recover } from "./recover";
 export { default as Register } from "./register";
 export { default as UpTo100kLoan } from "./upTo100kLoan";
+export { default as ChangePass } from "./changePassword";

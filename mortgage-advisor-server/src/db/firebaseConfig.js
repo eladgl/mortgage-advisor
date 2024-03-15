@@ -111,5 +111,56 @@ async function printUsers() {
     console.error("Error fetching users:", error);
   }
 }
+async function getUserData(email) {
+  const usersRef = db.collection("users");
+  const snapshot = await usersRef.where("email", "==", email).get();
 
-export { admin, registerUser, loginUser, getUserPassword, printUsers };
+  if (snapshot.empty) {
+    return null; // User not found
+  }
+
+  const userDoc = snapshot.docs[0];
+  return { id: userDoc.id, ...userDoc.data() };
+}
+
+async function changePassword(userId, oldPassword, newPassword) {
+  const userRef = db.collection("users").doc(userId);
+  const doc = await userRef.get();
+
+  if (!doc.exists) {
+    throw new Error("User not found");
+  }
+
+  const userData = doc.data();
+
+  const passwordMatch = await bcrypt.compare(oldPassword, userData.password);
+  if (!passwordMatch) {
+    throw new Error("Old password is incorrect");
+  }
+
+  const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+  await userRef.update({ password: hashedNewPassword });
+
+  return true;
+}
+async function getUserDataById(userId) {
+  const userRef = db.collection("users").doc(userId);
+  const doc = await userRef.get();
+
+  if (!doc.exists) {
+    return null;
+  }
+
+  return { id: doc.id, ...doc.data() };
+}
+
+export {
+  admin,
+  registerUser,
+  loginUser,
+  getUserPassword,
+  printUsers,
+  getUserData,
+  changePassword,
+  getUserDataById,
+};

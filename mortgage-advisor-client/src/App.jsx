@@ -13,9 +13,8 @@ import {
   Register,
   Recover,
   LoginPage,
+  ChangePass,
 } from "./pages";
-import { pageTypeSelector } from "./pages/pageTypeSelector";
-
 import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
@@ -60,6 +59,7 @@ const App = () => {
                 <Route path="/registration" element={<Register />} />
                 <Route path="/recover" element={<Recover />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/changePassword" element={<ChangePass />} />
               </Routes>
             </div>
           </Layout>
