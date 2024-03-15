@@ -10,6 +10,8 @@ import { TailWindLink } from "../components/link";
 import { Button } from "../components/button";
 import TailWindTable from "../components/tainWindTable";
 
+import * as access from "@access";
+
 const Wrapper = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -19,9 +21,9 @@ const Wrapper = styled.div`
   height: 100%;
 
   @media (min-width: 640px) {
-    padding: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    padding: 0 2rem;
+    margin-top:  0 2rem;;
+    margin-bottom:  0 2rem;;
   }
 `;
 
@@ -30,9 +32,6 @@ const HorizontalWrapper = styled.div`
     flex-direction: row;
     align-items: center;
 `;
-
-const citizenships = ['ישראלית', 'אמריקאית', 'אירופאית'];
-const property = ['נכס חדש', 'נכס משופץ', 'נכס בבנייה'];
 
 const GridCell = styled.div`
     
@@ -88,7 +87,6 @@ const CheckBestMortgage = () => {
         setFormValues({ ...formValues, [name]: newValue });
     };
 
-
     const renderGrid = () => {
         return (
             <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around">
@@ -97,19 +95,19 @@ const CheckBestMortgage = () => {
                     <Select
                         id="property"
                         name="property"
-                        options={property}
+                        options={ access.general('lists.property') }
                         value={formValues.property}
                         handleSelectChange={handleInputChange} />
                 </GridCell>
                 <GridCell>
                     <ImportantLabel htmlFor="bankName">שם בנק שבו מתהל חשבונך</ImportantLabel>
-                    <Input
-                        type="text"
+                    <Select
                         name="bankName"
                         id="bankName"
                         placeholder="לחץ כדי לבחור"
+                        options={ access.general('lists.bankNames') } 
                         value={formValues.bankName}
-                        onChange={handleInputChange}
+                        handleSelectChange={ handleInputChange }
                         required />
                 </GridCell>
                 <GridCell>
@@ -129,7 +127,7 @@ const CheckBestMortgage = () => {
                     <Select
                         id="citizenship"
                         name="citizenship"
-                        options={citizenships}
+                        options={ access.general('lists.citizenships') }
                         value={formValues.citizenship}
                         handleSelectChange={handleInputChange} />
                 </GridCell>

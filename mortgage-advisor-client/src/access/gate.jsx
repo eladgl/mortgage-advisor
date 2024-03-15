@@ -2,10 +2,12 @@ import { isObject, orderBy } from 'lodash';
 
 import colors from './mainConfig/colors';
 import icons from './mainConfig/icons';
+import general from './mainConfig/general';
 
 let config = {
     colors,
     icons,
+    general,
 };
 
 export const mergeDeep = (target, source) => {
