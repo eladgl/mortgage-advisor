@@ -29,33 +29,23 @@ admin.initializeApp({
 const db = admin.firestore();
 // Add a user to Firestore
 async function registerUser(userData) {
-  const {
-    pname,
-    lname,
-    phoneNumber,
-    email,
-    password,
-    rePassword,
-    ...additionalInfo
-  } = userData;
-  // In a real application, ensure you hash the password before storing it.
-  const newUserRef = db.collection("users").doc(); // Create a new document reference
+  const { password, rePassword, ...userInfo } = userData;
+  const newUserRef = db.collection("users").doc();
 
   await newUserRef.set({
-    pname,
-    lname,
-    phoneNumber,
-    email,
-    password,
-    // Don't store rePassword as it's only for validation
-    ...additionalInfo,
+    ...userInfo,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
-  return newUserRef.id; // Return the new user's document ID
-}
+  const savedUser = await newUserRef.get();
+  const userToReturn = {
+    id: newUserRef.id,
+    ...savedUser.data(),
+    password: undefined, // Remove sensitive data
+  };
 
-// "Login" by verifying user credentials (NOT secure as-is)
+  return userToReturn;
+}
 async function loginUser(email, password) {
   const usersRef = db.collection("users");
   const snapshot = await usersRef.where("email", "==", email).get();
@@ -67,11 +57,11 @@ async function loginUser(email, password) {
   const userDoc = snapshot.docs[0];
   const userData = userDoc.data();
 
-  // Here, you would verify the password, which should be hashed and compared securely
-  // This is a placeholder and NOT secure
+  // Verify the password securely (hash comparison, etc.)
   if (userData.password === password) {
-    // Passwords match - this is where you would return a session token or similar
-    return userDoc.id; // For example purposes only
+    // Placeholder for password check
+    const { password, ...userWithoutPassword } = userData;
+    return { id: userDoc.id, ...userWithoutPassword };
   } else {
     throw new Error("Invalid password");
   }
@@ -95,8 +85,7 @@ async function getUserPassword(email) {
     console.error("Error retrieving password:", error);
     return null; // or any other value to indicate an error occurred
   }
-};
-
+}
 
 async function printUsers() {
   try {

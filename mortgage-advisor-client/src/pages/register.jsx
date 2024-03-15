@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 import { Label, ImportantLabel } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
 import { TailWindLink } from "../components/link";
+import { useAuth } from "../context/AuthContext";
 
 const RegistrationWrapper = styled.section`
   width: 100%;
@@ -53,6 +54,8 @@ const Register = () => {
     password: "",
     rePassword: "",
   });
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,14 +69,13 @@ const Register = () => {
         "http://localhost:3001/register",
         formData
       );
-      console.log(response.data);
-      alert("User registered successfully");
+      login(response.data.token);
+      navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
       alert("Failed to register");
     }
   };
-
   return (
     <RegistrationWrapper>
       <HtmlFormWrapper>

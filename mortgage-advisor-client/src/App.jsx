@@ -20,6 +20,7 @@ import NavBar from "./components/navBar";
 import styled from "styled-components";
 import "./index.css";
 import TopNavBar from "./components/topNavBar";
+import { AuthProvider } from "./context/AuthContext";
 
 const Layout = styled.div`
   display: flex;
@@ -29,41 +30,40 @@ const Layout = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-image: 
-    linear-gradient(161deg, #265ca5, #0e346b);
+  background-image: linear-gradient(161deg, #265ca5, #0e346b);
 `;
 
-
 const App = () => {
-
   return (
     <Wrapper>
       <Router>
-        <TopNavBar />
-        <Layout className="mt-28 h-screen">
-          <div className="hidden sm:block">
-            <NavBar />
-          </div>
-          <div className="w-full h-full">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/newMortgage" element={<NewMortgage />} />
-              <Route
-                path="/checkBestMortgage"
-                element={<CheckBestMortgage />}
-              />
-              <Route path="/normalMortgage" element={<NormalMortgage />} />
-              <Route path="/upTo100kLoan" element={<UpTo100kLoan />} />
-              <Route path="/oneLoan" element={<OneLoan />} />
-              <Route path="/fewLoans" element={<FewLoans />} />
-              <Route path="/over100kLoan" element={<Over100kLoan />} />
-              <Route path="/contactUs" element={<ContactUs />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/recover" element={<Recover />} />
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </div>
-        </Layout>
+        <AuthProvider>
+          <TopNavBar />
+          <Layout className="mt-28 h-screen">
+            <div className="hidden sm:block">
+              <NavBar />
+            </div>
+            <div className="w-full h-full">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/newMortgage" element={<NewMortgage />} />
+                <Route
+                  path="/checkBestMortgage"
+                  element={<CheckBestMortgage />}
+                />
+                <Route path="/normalMortgage" element={<NormalMortgage />} />
+                <Route path="/upTo100kLoan" element={<UpTo100kLoan />} />
+                <Route path="/oneLoan" element={<OneLoan />} />
+                <Route path="/fewLoans" element={<FewLoans />} />
+                <Route path="/over100kLoan" element={<Over100kLoan />} />
+                <Route path="/contactUs" element={<ContactUs />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/recover" element={<Recover />} />
+                <Route path="/login" element={<LoginPage />} />
+              </Routes>
+            </div>
+          </Layout>
+        </AuthProvider>
       </Router>
     </Wrapper>
   );

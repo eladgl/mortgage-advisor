@@ -5,11 +5,13 @@ import {
   GoTriangleLeft,
 } from "react-icons/go";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-const DropDown = ({ dropDownLinks, user }) => {
+const DropDown = ({ dropDownLinks }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleToggleMenu = () => {
     setIsOpen(!isOpen);
@@ -28,8 +30,10 @@ const DropDown = ({ dropDownLinks, user }) => {
   };
 
   const handleLogOut = async (navigate) => {
-    alert("Logout goes here");
-    // navigate("/login");
+    localStorage.removeItem("token");
+    logout();
+    navigate("/login");
+    setIsOpen(false);
   };
 
   return (
@@ -70,18 +74,28 @@ const DropDown = ({ dropDownLinks, user }) => {
                 to={link.path}
                 className=" block px-4 py-4 sm:py-2 text-lg sm:text-sm text-gray-50 hover:bg-gray-50 hover:text-black border-b-2 border-gray-500"
                 role="menuitem"
-                style={{ textAlign: "right", backgroundColor: '#041a32', color: '#fff', zIndex: 900000 }}
+                style={{
+                  textAlign: "right",
+                  backgroundColor: "#041a32",
+                  color: "#fff",
+                  zIndex: 900000,
+                }}
               >
                 {link.name}
               </Link>
             ))}
-            {user ? (
+            {isAuthenticated ? (
               <button
                 className="text-gray-50 w-full border-t-2 hover:bg-red-400 hover:text-black px-3  py-6 sm:py-2 font-medium md:flex md:items-center md:px-4 md:text-base text-center"
                 onClick={() => {
                   handleLogOut(navigate);
                 }}
-                style={{ textAlign: "right", backgroundColor: '#041a32', color: '#fff', zIndex: 900000 }}
+                style={{
+                  textAlign: "right",
+                  backgroundColor: "#041a32",
+                  color: "#fff",
+                  zIndex: 900000,
+                }}
               >
                 התנתקות
               </button>

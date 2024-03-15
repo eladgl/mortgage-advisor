@@ -5,6 +5,8 @@ import { Label } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
 import { TailWindLink } from "../components/link";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -15,15 +17,16 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const GridCell = styled.div`
-    
-`;
+const GridCell = styled.div``;
 
 const TwoCells = styled(GridCell)`
-    grid-column: span 2;
+  grid-column: span 2;
 `;
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -32,8 +35,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/login", formValues);
+      const response = await axios.post(
+        "http://localhost:3001/login",
+        formValues
+      );
       console.log("Login successful:", response.data);
+      login(response.data.token);
+      navigate("/");
     } catch (error) {
       console.error("Error logging in:", error);
     }
@@ -46,11 +54,14 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 grid-rows-3 gap-8">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 grid-rows-3 gap-8"
+      >
         <TwoCells>
           <Label htmlFor="email">דואר אלקטרוני:</Label>
           <Input
-            type="email" 
+            type="email"
             placeholder="דואר אלקטרוני"
             id="email"
             name="email"
@@ -76,17 +87,17 @@ const Login = () => {
         </GridCell>
         <GridCell />
         <GridCell>
-          <TailWindLink href='recover'>שיחזור סיסמה</TailWindLink>
+          <TailWindLink href="recover">שיחזור סיסמה</TailWindLink>
         </GridCell>
         <GridCell />
         <GridCell>
           <Label>
-             {' עדיין לא רשום? '}
-            <TailWindLink href='register'>הרשם</TailWindLink>
-        </Label>
-      </GridCell>
-    </form>
-    </Wrapper >
+            {" עדיין לא רשום? "}
+            <TailWindLink href="register">הרשם</TailWindLink>
+          </Label>
+        </GridCell>
+      </form>
+    </Wrapper>
   );
 };
 

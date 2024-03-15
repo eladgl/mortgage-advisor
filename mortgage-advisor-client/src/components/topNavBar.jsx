@@ -4,8 +4,10 @@ import DropDown from "./dropDown";
 import styled from "styled-components";
 import { FaHome } from "react-icons/fa";
 import { linksConfig } from "../pages/config/linksConfig";
+import { useAuth } from "../context/AuthContext";
 const TopNavBar = () => {
-  const user = {};
+  const { isAuthenticated } = useAuth();
+
   const registeredDropDownLinks = linksConfig.map((link) => ({
     name: link.title,
     path: link.path,
@@ -16,7 +18,10 @@ const TopNavBar = () => {
   ];
 
   return (
-    <nav className="bg-blue-400  fixed top-0 w-full" style={{ backgroundColor: '#041a32', zIndex: 10000}}>
+    <nav
+      className="bg-blue-400  fixed top-0 w-full"
+      style={{ backgroundColor: "#041a32", zIndex: 10000 }}
+    >
       <div className="flex justify-between items-center sm:px-4 py-3 md:px-10 md:py-5">
         <div className="flex items-center">
           <Link
@@ -27,10 +32,10 @@ const TopNavBar = () => {
           </Link>
         </div>
         <div className="flex">
-          {user ? (
-            <DropDown dropDownLinks={registeredDropDownLinks} user={user} />
+          {isAuthenticated ? (
+            <DropDown dropDownLinks={registeredDropDownLinks} />
           ) : (
-            <DropDown dropDownLinks={unRegisteredDropDownLinks} user={user} />
+            <DropDown dropDownLinks={unRegisteredDropDownLinks} />
           )}
         </div>
       </div>
