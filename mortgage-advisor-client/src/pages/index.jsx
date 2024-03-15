@@ -12,3 +12,4 @@ export { default as Register } from "./register";
 export { default as UpTo100kLoan } from "./upTo100kLoan";
 export { default as ChangePass } from "./changePassword";
 export { default as ResetPassword } from "./resetPassword";
+export { default as PageNotFound } from "./pageNotFound";
