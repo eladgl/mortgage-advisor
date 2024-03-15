@@ -5,8 +5,7 @@ import { FaHome } from "react-icons/fa";
 import { linksConfig } from "../pages/config/linksConfig";
 import { useAuth } from "../context/AuthContext";
 const TopNavBar = () => {
-  const { isAuthenticated } = useAuth();
-
+  const { isAuthenticated, user  } = useAuth();
   const registeredDropDownLinks = linksConfig.map((link) => ({
     name: link.title,
     path: link.path,
@@ -30,13 +29,18 @@ const TopNavBar = () => {
           >
             <FaHome size={48} />
           </Link>
+          {isAuthenticated && user && (
+            <span className="ml-2 text-white text-xl font-bold mt-2 mr-4">{`${user.pname || ''} ${user.lname || ''}`}</span> // Adjust this according to how the user name is stored
+          )}
         </div>
         <div className="flex">
+
           {isAuthenticated ? (
             <DropDown dropDownLinks={registeredDropDownLinks} />
           ) : (
             <DropDown dropDownLinks={unRegisteredDropDownLinks} />
           )}
+        
         </div>
       </div>
     </nav>
