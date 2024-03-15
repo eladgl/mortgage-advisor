@@ -39,8 +39,8 @@ const App = () => {
       <Router>
         <AuthProvider>
           <TopNavBar />
-          <Layout className="mt-28 h-screen">
-            <div className="hidden sm:block">
+          <Layout className="mt-28 h-screen ">
+            <div className="hidden md:block ">
               <NavBar />
             </div>
             <div className="w-full h-full">
@@ -57,7 +57,7 @@ const App = () => {
                 <Route path="/fewLoans" element={<FewLoans />} />
                 <Route path="/over100kLoan" element={<Over100kLoan />} />
                 <Route path="/contactUs" element={<ContactUs />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/registration" element={<Register />} />
                 <Route path="/recover" element={<Recover />} />
                 <Route path="/login" element={<LoginPage />} />
               </Routes>

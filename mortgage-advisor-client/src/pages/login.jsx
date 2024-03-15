@@ -1,39 +1,91 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { Label } from "../components/label";
-import { Input } from "../components/input";
-import { Button } from "../components/button";
-import { TailWindLink } from "../components/link";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+// const Wrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+//   background-color: #f4f7fa;
+// `;
 const Wrapper = styled.div`
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid black;
+  padding-top: 8rem;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+`;
+const Form = styled.form`
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   background-color: white;
-  border-radius: 1rem;
-  height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const GridCell = styled.div``;
+const ErrorMessage = styled.div`
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+const PageTitle = styled.h1`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
 
-const TwoCells = styled(GridCell)`
-  grid-column: span 2;
+const Button = styled.button`
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const Link = styled.a`
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
 `;
 
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
+  const [formValues, setFormValues] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     try {
       const response = await axios.post(
         "http://localhost:3001/login",
@@ -43,6 +95,7 @@ const Login = () => {
       login(response.data.token);
       navigate("/");
     } catch (error) {
+      setError("Login failed, please check your credentials.");
       console.error("Error logging in:", error);
     }
   };
@@ -54,49 +107,35 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-2 grid-rows-3 gap-8"
-      >
-        <TwoCells>
-          <Label htmlFor="email">דואר אלקטרוני:</Label>
+      <PageTitle>דף התחברות</PageTitle>
+
+      <Form onSubmit={handleSubmit}>
+        <div>
           <Input
             type="email"
-            placeholder="דואר אלקטרוני"
-            id="email"
+            placeholder="Email"
             name="email"
             value={formValues.email}
             onChange={handleInputChange}
             required
           />
-        </TwoCells>
-        <TwoCells>
-          <Label htmlFor="password">סיסמה:</Label>
+        </div>
+        <div>
           <Input
             type="password"
-            placeholder="סיסמה"
-            id="password"
+            placeholder="Password"
             name="password"
             value={formValues.password}
             onChange={handleInputChange}
             required
           />
-        </TwoCells>
-        <GridCell>
-          <Button type="submit">כניסה</Button>
-        </GridCell>
-        <GridCell />
-        <GridCell>
-          <TailWindLink href="recover">שיחזור סיסמה</TailWindLink>
-        </GridCell>
-        <GridCell />
-        <GridCell>
-          <Label>
-            {" עדיין לא רשום? "}
-            <TailWindLink href="register">הרשם</TailWindLink>
-          </Label>
-        </GridCell>
-      </form>
+        </div>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
+        <Button type="submit">התחברות</Button>
+        <Link href="recover">שכחת סיסמא?</Link>
+        <Link href="registration">הרשמה</Link>
+      </Form>
     </Wrapper>
   );
 };
