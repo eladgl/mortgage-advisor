@@ -144,7 +144,7 @@ const NormalMortgage = () => {
                                 value="" 
                                 className="sr-only peer" checked={formValues.agreement}
                                 onChange={handleInputChange} />
-                            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         </Label>
                         <CustomLink 
                             href="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" 
@@ -165,7 +165,7 @@ const NormalMortgage = () => {
         <Wrapper>
             <h3>מעוניין לקחת הלוואה רגילה</h3>
             <h3>מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
-            <h1>אני מעוניין לקחת הלוואה אחת</h1>
+            <h1 className='text-center lg:text-right'>אני מעוניין לקחת הלוואה אחת</h1>
             {renderGrid()}
         </Wrapper>
     );

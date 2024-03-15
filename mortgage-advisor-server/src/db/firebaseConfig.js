@@ -154,6 +154,24 @@ async function getUserDataById(userId) {
   return { id: doc.id, ...doc.data() };
 }
 
+// Add a function to store check details
+async function storeCheck(checkDetails) {
+  const { userId, userPrivateName, userLastName, userEmail, formValues } = checkDetails;
+
+  const checkRef = db.collection("mortgageChecks").doc();
+  await checkRef.set({
+    userId,
+    userPrivateName,
+    userLastName,
+    userEmail,
+    formValues,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+
+  const savedCheck = await checkRef.get();
+  return { id: checkRef.id, ...savedCheck.data() };
+}
+
 export {
   admin,
   registerUser,
@@ -163,4 +181,5 @@ export {
   getUserData,
   changePassword,
   getUserDataById,
+  storeCheck
 };
