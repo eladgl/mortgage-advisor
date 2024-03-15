@@ -8,6 +8,7 @@ import {
   getUserPassword,
   changePassword,
   getUserDataById,
+  storeCheck
 } from "./db/firebaseConfig.js";
 import { sendMail, recoverMail } from "./utilities/mails.js";
 import jwt from "jsonwebtoken";
@@ -57,6 +58,25 @@ app.get("/userData", authenticateToken, async (req, res) => {
     res
       .status(500)
       .json({ message: "Error fetching user data", error: error.message });
+  }
+});
+
+// Create an endpoint to store check details
+app.post("/storeCheck", async (req, res) => {
+  try {
+    const checkDetails = req.body;
+    const result = await storeCheck(checkDetails);
+
+    res.status(200).json({
+      message: "Check stored successfully",
+      data: result
+    });
+  } catch (error) {
+    console.error("Error storing check:", error);
+    res.status(500).json({
+      message: "Failed to store check",
+      error: error.message
+    });
   }
 });
 

@@ -16,7 +16,6 @@ export const Label = styled.label`
 export const ImportantLabel = styled(Label)`
    &::before {
     content: '*';
-    position: absolute;
     top: 0;
     right: -10px;
     color: red;
