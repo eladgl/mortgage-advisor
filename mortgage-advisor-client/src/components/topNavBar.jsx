@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DropDown from "./dropDown";
-import styled from "styled-components";
 import { FaHome } from "react-icons/fa";
 import { linksConfig } from "../pages/config/linksConfig";
 import { useAuth } from "../context/AuthContext";
@@ -14,7 +13,8 @@ const TopNavBar = () => {
   }));
 
   const unRegisteredDropDownLinks = [
-    { name: "Register", path: "/registration" },
+    { name: "צור קשר", path: "/contactus" },
+    { name: "הרשמה", path: "/registration" },
   ];
 
   return (

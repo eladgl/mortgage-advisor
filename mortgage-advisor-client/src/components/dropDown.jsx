@@ -86,7 +86,7 @@ const DropDown = ({ dropDownLinks }) => {
             ))}
             {isAuthenticated ? (
               <button
-                className=" hover:bg-red-400 block px-4 py-4 md:py-2 text-lg md:text-sm text-gray-50  border-b-2 border-gray-500 bg-gray-900 w-full"
+                className=" hover:bg-red-400 hover:text-black block px-4 py-4 md:py-2 text-lg md:text-sm text-gray-50  border-b-2 border-gray-500 bg-gray-900 w-full"
                 onClick={() => {
                   handleLogOut(navigate);
                 }}
@@ -100,7 +100,7 @@ const DropDown = ({ dropDownLinks }) => {
               <Link
                 key={"loginBtn"}
                 to="/login"
-                className=" hover:bg-green-400 block px-4 py-4 md:py-2 text-lg md:text-sm text-gray-50  border-b-2 border-gray-500 bg-gray-900 w-full"
+                className=" hover:bg-green-400 hover:text-black block px-4 py-4 md:py-2 text-lg md:text-sm text-gray-50  border-b-2 border-gray-500 bg-gray-900 w-full"
                 role="menuitem"
                 style={{ textAlign: "right" }}
               >
