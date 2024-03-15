@@ -27,7 +27,7 @@ export async function sendMail(formData) {
     console.log(`Message sent: ${info?.messageId}`);
 };
 
-export async function recoverMail({ email, password }) {
+export async function recoverMail({ email, link }) {
     const transporter = nodeMailer.createTransport({
         service: "Gmail",
         host: "smtp.gmail.com",
@@ -39,8 +39,17 @@ export async function recoverMail({ email, password }) {
         },
     });
 
-    const html = `<p>Email: ${email}</p>
-                  <p>Password: ${password}</p>`;
+    const html = `
+    <div style="font-family: Arial, sans-serif; color: #333; text-align: right; direction: rtl;">
+        <h1>בקשה לאיפוס סיסמה</h1>
+        <p>שלום,</p>
+        <p>התקבלה בקשה לאיפוס הסיסמה שלך. לחץ על הקישור הבא כדי להמשיך:</p>
+        <p><a href="${link}" style="color: #007bff; text-decoration: none;">אפס סיסמה</a></p>
+        <p>אם לא ביקשת לאפס את הסיסמה, תוכל להתעלם מהמייל הזה.</p>
+        <p>תודה,</p>
+        <p>צוות האתר</p>
+    </div>
+`;
 
     const info = await transporter.sendMail({
         from: 'NodeMailer Recover password',

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import styled from "styled-components";
-
 import axios from "axios";
 
-import { ImportantLabel, Label } from "../components/label";
+import { ImportantLabel } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
 
@@ -23,67 +21,75 @@ const Wrapper = styled.div`
   }
 `;
 
-const GridCell = styled.div`
-    
+const Message = styled.div`
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const TwoCells = styled(GridCell)`
-    grid-column: span 2;
+const ErrorMessage = styled(Message)`
+  color: #d32f2f;
+  background-color: #ffebee;
+`;
+
+const SuccessMessage = styled(Message)`
+  color: #2e7d32;
+  background-color: #e8f5e9;
 `;
 
 const Recover = () => {
-    const [formValues, setFormValues] = useState({
-        email: '',
-    });
-
-    const [isFormValid, setIsFormValid] = useState(false);
+    const [formValues, setFormValues] = useState({ email: '' });
     const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
-    useEffect(() => {
-        const isFormValid = formValues.email !== '';
-        setIsFormValid(isFormValid);
-    }, [formValues]);
+    const validateEmail = (email) => {
+        return email.match(
+            /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        );
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3001/recover", formValues);
-            setMessage("success");
-          } catch (error) {
-            console.error("Error submitting form:", error);
-            setMessage("failure");
-          }
-    }
+        if (!validateEmail(formValues.email)) {
+            setError("כתובת דואר אלקטרוני לא תקינה");
+            return;
+        }
 
-    const handleInputChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        setFormValues({ ...formValues, [name]: value });
+        setMessage('');
+        setError('');
+        try {
+            await axios.post("http://localhost:3001/requestPasswordReset", { email: formValues.email });
+            setMessage("קישור לאיפוס הסיסמא נשלח למייל שלך, לרשותך 25 דקות לשינוי הסיסמא");
+        } catch (error) {
+            console.error("Error requesting password reset:", error);
+            setError("תקלה בבקשת איפוס הסיסמא");
+        }
     };
 
-    const renderRecover = () => {
-        return (
-            <form onSubmit={handleSubmit} className="grid grid-cols-3 grid-rows-1 gap-8">
-                <TwoCells>
-                    <ImportantLabel>דואר אלקטרוני</ImportantLabel>
-                    <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="דואר אלקטרוני"
-                        value={formValues.email}
-                        onChange={handleInputChange} />
-                </TwoCells>
-                <GridCell />
-                <GridCell>
-                    <Button type="submit" disabled={!isFormValid}>שחזר סיסמה</Button>
-                </GridCell>
-            </form>
-        );
+    const handleInputChange = (event) => {
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
     };
 
     return (
         <Wrapper>
-            {renderRecover()}
+            <form onSubmit={handleSubmit} className="pt-8 flex flex-col gap-4">
+                <div>
+                    <ImportantLabel htmlFor="email">דואר אלקטרוני</ImportantLabel>
+                    <Input
+                        id="email"
+                        name="email"
+                        placeholder="הכנס דואר אלקטרוני"
+                        value={formValues.email}
+                        onChange={handleInputChange} />
+                    {error && <ErrorMessage>{error}</ErrorMessage>}
+                </div>
+                <Button type="submit" disabled={!formValues.email}>שחזר סיסמה</Button>
+                {message && <SuccessMessage>{message}</SuccessMessage>}
+            </form>
         </Wrapper>
     );
 };

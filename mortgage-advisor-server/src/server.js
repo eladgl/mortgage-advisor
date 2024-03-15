@@ -5,13 +5,18 @@ import bodyParser from "body-parser";
 import {
   registerUser,
   loginUser,
-  getUserPassword,
   changePassword,
   getUserDataById,
-  storeCheck
+  storeCheck,
+  storeResetToken,
+  getUserByEmail,
+  getUserByResetToken,
+  resetPassword,
+  clearResetToken
 } from "./db/firebaseConfig.js";
 import { sendMail, recoverMail } from "./utilities/mails.js";
 import jwt from "jsonwebtoken";
+import crypto from 'crypto'; // For generating random tokens
 
 // Create an express application
 const app = express();
@@ -134,23 +139,90 @@ app.post("/contactUs", (req, res) => {
   res.status(200).json({ message: "Form submitted successfully" });
 });
 
-app.post("/recover", async (req, res) => {
+// app.post("/recover", async (req, res) => {
+//   const { email } = req.body;
+//   try {
+//     // Fetch user's password from the database
+//     const password = await getUserPassword(email);
+
+//     // Send password via email
+//     await recoverMail({ email, password });
+
+//     res
+//       .status(200)
+//       .json({ message: "Password sent successfully to user's email" });
+//   } catch (error) {
+//     console.error("Error sending password:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Failed to send password", error: error.message });
+//   }
+// });
+
+app.post("/requestPasswordReset", async (req, res) => {
   const { email } = req.body;
   try {
-    // Fetch user's password from the database
-    const password = await getUserPassword(email);
+      const user = await getUserByEmail(email);
+      if (!user) {
+          return res.status(404).json({ message: "User not found." });
+      }
 
-    // Send password via email
-    await recoverMail({ email, password });
+      const resetToken = crypto.randomBytes(20).toString('hex');
+      const resetExpires = Date.now() + 25 * 60 * 1000; // 25 minutes from now
 
-    res
-      .status(200)
-      .json({ message: "Password sent successfully to user's email" });
+      await storeResetToken(user.id, resetToken, resetExpires);
+
+      const resetLink = `http://localhost:5173/resetPassword/${resetToken}`;
+      await recoverMail({ email, link: resetLink });
+
+      res.status(200).json({ message: "Reset password link sent to email." });
   } catch (error) {
-    console.error("Error sending password:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to send password", error: error.message });
+      console.error("Error requesting password reset:", error);
+      res.status(500).json({ message: "Error requesting password reset." });
+  }
+});
+
+// Endpoint to verify reset token
+app.get("/verifyResetToken/:token", async (req, res) => {
+  const { token } = req.params;
+  try {
+      const user = await getUserByResetToken(token);
+      if (!user) {
+          return res.status(404).json({ message: "Invalid token." });
+      }
+
+      const now = new Date();
+      if (user.resetTokenExpires < now) {
+          return res.status(400).json({ message: "Token has expired." });
+      }
+
+      res.status(200).json({ message: "Token is valid.", userId: user.id });
+  } catch (error) {
+      console.error("Error verifying token:", error);
+      res.status(500).json({ message: "Error verifying token." });
+  }
+});
+// Endpoint to reset password
+app.post("/resetPassword", async (req, res) => {
+  const { token, newPassword } = req.body;
+  try {
+      const user = await getUserByResetToken(token);
+      if (!user) {
+          return res.status(404).json({ message: "Invalid token." });
+      }
+
+      const now = new Date();
+      if (user.resetTokenExpires < now) {
+          return res.status(400).json({ message: "Token has expired." });
+      }
+
+      await resetPassword(user.id, newPassword);
+      await clearResetToken(user.id);
+
+      res.status(200).json({ message: "Password has been reset successfully." });
+  } catch (error) {
+      console.error("Error resetting password:", error);
+      res.status(500).json({ message: "Error resetting password." });
   }
 });
 

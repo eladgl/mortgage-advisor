@@ -74,26 +74,6 @@ async function loginUser(email, password) {
   }
 }
 
-async function getUserPassword(email) {
-  try {
-    const usersRef = db.collection("users");
-    const snapshot = await usersRef.where("email", "==", email).get();
-
-    if (snapshot.empty) {
-      console.error("User not found");
-      return null; // or any other value to indicate user not found
-    }
-
-    const userDoc = snapshot.docs[0];
-    const userData = userDoc.data();
-    console.log(userData.password);
-    return userData.password;
-  } catch (error) {
-    console.error("Error retrieving password:", error);
-    return null; // or any other value to indicate an error occurred
-  }
-}
-
 async function printUsers() {
   try {
     const usersRef = db.collection("users");
@@ -172,14 +152,82 @@ async function storeCheck(checkDetails) {
   return { id: checkRef.id, ...savedCheck.data() };
 }
 
+async function storeResetToken(email, token, expires) {
+  const userRef = db.collection("users").doc(email);
+  await userRef.update({
+      resetPasswordToken: token,
+      resetPasswordExpires: expires
+  });
+}
+
+async function getUserByEmail(email) {
+  const usersRef = db.collection("users");
+  const snapshot = await usersRef.where("email", "==", email).get();
+
+  if (snapshot.empty) {
+    console.error("User not found");
+    return null;
+  }
+
+  const userDoc = snapshot.docs[0];
+  return { id: userDoc.id, ...userDoc.data() };
+}
+
+async function getUserByResetToken(token) {
+  const usersRef = db.collection("users");
+  const snapshot = await usersRef.where("resetPasswordToken", "==", token).get();
+
+  if (snapshot.empty) {
+    console.error("User not found for given reset token");
+    return null;
+  }
+
+  const userDoc = snapshot.docs[0];
+  const userData = userDoc.data();
+
+  // Check if token has expired
+  const now = Date.now();
+  if (userData.resetPasswordExpires < now) {
+    console.error("Reset token has expired");
+    return null;
+  }
+
+  return { id: userDoc.id, ...userData };
+}
+async function resetPassword(userId, newPassword) {
+  const userRef = db.collection("users").doc(userId);
+  const doc = await userRef.get();
+
+  if (!doc.exists) {
+    throw new Error("User not found");
+  }
+
+  const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+  await userRef.update({ password: hashedNewPassword });
+
+  return true;
+}
+
+async function clearResetToken(userId) {
+  const userRef = db.collection("users").doc(userId);
+  await userRef.update({
+      resetPasswordToken: null,
+      resetPasswordExpires: null
+  });
+}
+
 export {
   admin,
   registerUser,
   loginUser,
-  getUserPassword,
   printUsers,
   getUserData,
   changePassword,
   getUserDataById,
-  storeCheck
+  storeCheck,
+  storeResetToken,
+  getUserByEmail,
+  getUserByResetToken,
+  resetPassword,
+  clearResetToken
 };
