@@ -17,7 +17,6 @@ const Wrapper = styled.div`
 
   @media (min-width: 640px) {
     padding: 0 2rem;
-    margin-top: 2rem;
     margin-bottom: 2rem;
   }
 `;
@@ -97,8 +96,8 @@ const ChangePassword = () => {
   };
 
   return (
-    <Wrapper>
-      <form onSubmit={handleSubmit}>
+    <Wrapper >
+      <form onSubmit={handleSubmit} className="pt-4">
         <GridCell>
           <ImportantLabel htmlFor="oldPassword">סיסמא ישנה</ImportantLabel>
           <Input

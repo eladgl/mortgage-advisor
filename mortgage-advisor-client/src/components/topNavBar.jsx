@@ -21,7 +21,7 @@ const TopNavBar = () => {
       className="bg-blue-400  fixed top-0 w-full"
       style={{ backgroundColor: "#041a32", zIndex: 10000 }}
     >
-      <div className="flex justify-between items-center sm:px-4 py-3 md:px-10 md:py-5">
+      <div className="flex justify-between items-center sm:px-4 py-3 md:px-10 ">
         <div className="flex items-center">
           <Link
             to="/"

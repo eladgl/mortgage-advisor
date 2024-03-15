@@ -42,7 +42,7 @@ const FewLoans = () => {
     return (
         <Wrapper>
             <TitleBorderDiv>
-            <h3>מעוניין לקחת הלוואה רגילה</h3>
+            <h3 className="pt-4">מעוניין לקחת הלוואה רגילה</h3>
             <h3>מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
             <ChosenTitles>אני מעוניין לקחת כמה הלוואות</ChosenTitles>
             </TitleBorderDiv>

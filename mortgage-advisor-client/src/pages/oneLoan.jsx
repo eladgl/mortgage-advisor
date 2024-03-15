@@ -112,7 +112,7 @@ const OneLoan = () => {
 
     const renderGrid = () => {
         return (
-            <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around">
+            <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around ">
                 <GridCell>
                     <ImportantLabel htmlFor="bankName">שם בנק שבו מתהל חשבונך</ImportantLabel>
                     <Select
@@ -196,8 +196,8 @@ const OneLoan = () => {
 
     return (
 
-        <Wrapper>
-            <h3>מעוניין לקחת הלוואה רגילה</h3>
+        <Wrapper >
+            <h3 className="pt-4">מעוניין לקחת הלוואה רגילה</h3>
             <h3>מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
             <ChosenTitles>אני מעוניין לקחת הלוואה אחת</ChosenTitles>
             {isButtonClicked ? renderAfterCalc() : renderGrid()}
