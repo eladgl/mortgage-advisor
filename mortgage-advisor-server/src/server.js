@@ -6,6 +6,8 @@ import {
   registerUser,
   loginUser,
   getUserPassword,
+  changePassword,
+  getUserDataById,
 } from "./db/firebaseConfig.js";
 import { sendMail, recoverMail } from "./utilities/mails.js";
 import jwt from "jsonwebtoken";
@@ -19,10 +21,43 @@ const jwtSecret = process.env.JWT_SECRET;
 // Define a port number
 const port = 3001; // Ensure this port is different from your React app's port
 
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
+
 // Add a GET route
 app.get("/test", (req, res) => {
   // Send a response when this route is accessed
   res.json({ message: "Connection successful!" });
+});
+
+app.get("/userData", authenticateToken, async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const userData = await getUserDataById(userId);
+    if (!userData) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Remove sensitive data before sending it to the client
+    delete userData.password;
+    res.status(200).json(userData);
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching user data", error: error.message });
+  }
 });
 
 // Endpoint for registering a new user
@@ -96,6 +131,22 @@ app.post("/recover", async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to send password", error: error.message });
+  }
+});
+
+// Endpoint for changing password
+app.post("/changePassword", authenticateToken, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user.id; // Extract userId from the token
+
+  try {
+    const result = await changePassword(userId, oldPassword, newPassword);
+    if (result) {
+      res.status(200).json({ message: "Password changed successfully" });
+    }
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({ message: error.message });
   }
 });
 

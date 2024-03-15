@@ -92,7 +92,7 @@ const Login = () => {
         formValues
       );
       console.log("Login successful:", response.data);
-      login(response.data.token);
+      login(response.data.token, response.data.user);
       navigate("/");
     } catch (error) {
       setError("Login failed, please check your credentials.");
