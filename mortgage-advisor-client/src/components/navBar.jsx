@@ -7,6 +7,7 @@ import { linksConfig } from "../pages/config/linksConfig";
 import * as access from "@access";
 import * as types from "../pages/constants/pagesTypes";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 import SvgIcon from "./svgIcon";
 
@@ -27,18 +28,22 @@ const LinkContainer = styled.div`
 
 const NavigationDiv = styled.div`
   overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
   //width: 400px;
 `;
 
 const NavigationButton = styled.label`
   background-color: #04aaaa;
-  height: 7rem;
-  width: 7rem;
+  height: 4rem;
+  width: 4rem;
   position: fixed;
   top: 8rem;
-  right: 6rem;
+  right: 3.5rem;
   border-radius: 50%;
   z-index: 2000;
+  opacity: .5;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: pointer;
@@ -54,11 +59,11 @@ const NavigationButton = styled.label`
 
 const NavigationIcon = styled.span`
    position: relative;
-   margin-top: 3.5rem;
+   margin-top: 2.0rem;
 
    &, &::before, &::after {
     content: "";
-    width: 3rem;
+    width: 2rem;
     height: 2px;
     background-color: #333;
     display: inline-block;
@@ -85,10 +90,10 @@ const NavigationBackground = styled.div`
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
-  /* position: fixed;
-  top: 8.5rem;
-  right: 6.5rem; */
-  background-image: radial-gradient(#041af2, #041a32);
+  position: absolute;
+  top: -8rem;
+  right: 6.5rem; 
+  background-image: radial-gradient(#041132, #041a32);
   z-index: 1000;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
 `;
@@ -97,12 +102,16 @@ const NavigationCheckbox = styled.input`
   display: none;
 
   &:checked ~ .navigation__background {
-    transform: scale(80);
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    right: 0rem; 
   }
 
-  &:checked~.navigation__nav {
+  &:checked~ .navigation__background .navigation__nav {
   opacity: 1;
   width: 100%;
+  height: 100%;
   }
 
   &:checked+.navigation__button .navigation__icon {
@@ -120,18 +129,18 @@ const NavigationCheckbox = styled.input`
 `;
 
 const NavigationList = styled.ul`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   list-style: none;
-  text-align: center;
+  text-align: right;
   width: 100%;
 `;
 
 const NavigationNav = styled.nav`
   height: 100%;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 1500;
@@ -142,6 +151,8 @@ const NavigationNav = styled.nav`
 
 const NavigationItem = styled.li`
   margin: 1rem;
+  padding-right: ${(props) => props.paddings}rem;
+  font-weight: ${(props) => props.bold === 'true' && 700 };
 `;
 
 const NavigationLink = styled.a`
@@ -154,7 +165,7 @@ const NavigationLink = styled.a`
   text-decoration: none;
   text-transform: uppercase;
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
-  background-size: 50%;
+  background-size: 220%;
   transition: all .4s;
   }
 
@@ -172,67 +183,56 @@ const NavigationLink = styled.a`
 
 
 const NavBar = () => {
-  const user = {};
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+
   const registeredDropDownLinks = linksConfig.map((link) => ({
     name: link.title,
     path: link.path,
+    icon: link.icon,
+    padding: link.padding,
+    bold: location.pathname === link.path || location.pathname === link.secondaryPath,
   }));
 
   const unRegisteredDropDownLinks = [
-    { name: "Register", path: "/registration" },
+    { name: "התחבר", path: "/registration" },
   ];
-  const location = useLocation();
-
-  // const renderLinks = () => {
-  //   return linksConfig.map((link) => (
-  //     <LinkContainer key={link.path}>
-  //       <Link
-  //         href={link.path}
-  //         size={link.size}
-  //         bold={location.pathname === link.path || location.pathname === link.secondaryPath}
-  //         padding={link.padding}
-  //         value={link.title}
-  //         component={link.component}
-  //       />
-  //       {link.icon && <SvgIcon name={access.icon(`icons.${link.icon}`)} />}
-  //     </LinkContainer>
-  //   ));
-  // };
 
   const renderLi = (links) => {
-    console.log(links);
+    
+
     return links.map((link, index) => {
+      //console.log(link)
       return (
-        <NavigationItem className="navigation__item">
+        <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding} bold={link.bold.toString()}>
           <NavigationLink href={link.path} className="navigation__link">
-            <span>{` 0${index + 1} `}</span>{link.name}
-            </NavigationLink>
-          </NavigationItem>
+            <span> {` 0${index + 1}`} </span> {link.name}
+            {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
+          </NavigationLink>
+        </NavigationItem>
       );
     });
   };
 
   const renderRightNavBar = () => {
     return (
-      <nav className="bg-blue-400  fixed top-0 w-full" style={{ backgroundColor: '#041a32', zIndex: 10000 }}>
-        <div className="flex justify-between items-center sm:px-4 py-3 md:px-10 md:py-5">
           <NavigationDiv className="navigation">
+            <div>
             <NavigationCheckbox type="checkbox" className="navigation__checkbox" id="navi-toggle" />
 
-            <NavigationButton className="navigation__button" for="navi-toggle">
+            <NavigationButton className="navigation__button" htmlFor="navi-toggle">
               <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
             </NavigationButton>
 
-            <NavigationBackground className="navigation__background">&nbsp;</NavigationBackground>
-
-            <NavigationNav className="navigation__nav">
-              <NavigationList className="navigation__list">
-                {renderLi(!user.name ? registeredDropDownLinks : unRegisteredDropDownLinks)}
-              </NavigationList>
-            </NavigationNav>
+            <NavigationBackground className="navigation__background">
+              <NavigationNav className="navigation__nav">
+                <NavigationList className="navigation__list">
+                  {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}
+                </NavigationList>
+              </NavigationNav>
+            </NavigationBackground>
+            </div>
           </NavigationDiv>
-        </div>
-      </nav>
     )
   }
 
