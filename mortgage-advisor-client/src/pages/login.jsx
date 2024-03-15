@@ -4,17 +4,11 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-// const Wrapper = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-//   background-color: #f4f7fa;
-// `;
+
 const Wrapper = styled.div`
   padding-top: 8rem;
   background-color: #f4f7fa;
-  min-height: 100vh;
+  min-height: 91vh;
 `;
 const Form = styled.form`
   width: 100%;
@@ -112,22 +106,19 @@ const Login = () => {
       <Form onSubmit={handleSubmit}>
         <div>
           <Input
-            type="email"
-            placeholder="Email"
+            placeholder="כתובת האימייל שלך"
             name="email"
             value={formValues.email}
             onChange={handleInputChange}
-            required
           />
         </div>
         <div>
           <Input
             type="password"
-            placeholder="Password"
+            placeholder="הסיסמא שלך"
             name="password"
             value={formValues.password}
             onChange={handleInputChange}
-            required
           />
         </div>
         {error && <ErrorMessage>{error}</ErrorMessage>}

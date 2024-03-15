@@ -37,7 +37,7 @@ const DropDown = ({ dropDownLinks }) => {
   };
 
   return (
-    <div className="md:hidden inline-block relative  text-left mx-auto mt-2 md:ml-8">
+    <div className="inline-block relative  text-left mx-auto mt-2 md:ml-8">
       <div
         ref={menuRef}
         className={` md:w-auto transition-width duration-1000 ease-in-out ${

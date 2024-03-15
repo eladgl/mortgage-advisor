@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   border: 1px solid black;
   background-color: white;
   border-radius: 1rem;
-  height: auto;
+  height: 100%;
 `;
 
 const HorizontalWrapper = styled.div`

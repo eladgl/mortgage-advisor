@@ -32,22 +32,33 @@ admin.initializeApp({
 const db = admin.firestore();
 // Add a user to Firestore
 async function registerUser(userData) {
-  const { password, rePassword, ...userInfo } = userData;
+  const { email, password, rePassword, ...userInfo } = userData;
+
+  // Check if the email is already in use
+  const usersRef = admin.firestore().collection('users');
+  const snapshot = await usersRef.where('email', '==', email).get();
+  if (!snapshot.empty) {
+      throw new Error('Email already in use');
+  }
+
+  // Hash the password
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  const newUserRef = db.collection("users").doc();
-
+  // Create the user record
+  const newUserRef = usersRef.doc();
   await newUserRef.set({
-    ...userInfo,
-    password: hashedPassword,
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      ...userInfo,
+      email,
+      password: hashedPassword,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
+  // Fetch the newly created user to return
   const savedUser = await newUserRef.get();
   const userToReturn = {
-    id: newUserRef.id,
-    ...savedUser.data(),
-    password: undefined,
+      id: newUserRef.id,
+      ...savedUser.data(),
+      password: undefined, // Exclude the password from the returned user object
   };
 
   return userToReturn;
