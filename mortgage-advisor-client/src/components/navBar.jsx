@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styled from "styled-components";
-import Link from "./link";
+import { Link } from "react-router-dom";
 import { linksConfig } from "../pages/config/linksConfig";
 import * as access from "@access";
 import * as types from "../pages/constants/pagesTypes";
@@ -153,7 +153,7 @@ const NavigationItem = styled.li`
   font-weight: ${(props) => props.bold === 'true' && 700};
 `;
 
-const NavigationLink = styled.a`
+const NavigationLink = styled(Link)`
   &:link, &:visited {
   display: inline-block;
   font-size: 1rem;
@@ -204,7 +204,7 @@ const NavBar = () => {
       //console.log(link)
       return (
         <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding}>
-          <NavigationLink href={link.path} className="navigation__link">
+          <NavigationLink to={link.path} className="navigation__link">
             <span> {` `} </span> {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
           </NavigationLink>
