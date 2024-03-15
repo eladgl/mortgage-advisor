@@ -95,7 +95,7 @@ const NavigationBackground = styled.div`
   right: 6.5rem; 
   background-image: radial-gradient(#041132, #041a32);
   z-index: 1000;
-  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform 1s cubic-bezier(.34,.33,.86,.87);
 `;
 
 const NavigationCheckbox = styled.input`
@@ -129,7 +129,7 @@ const NavigationCheckbox = styled.input`
 `;
 
 const NavigationList = styled.ul`
-  position: fixed;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -146,7 +146,7 @@ const NavigationNav = styled.nav`
   z-index: 1500;
   opacity: 0;
   width: 0;
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.4 cubic-bezier(.34,.33,.86,.87);
 `;
 
 const NavigationItem = styled.li`
@@ -166,7 +166,7 @@ const NavigationLink = styled.a`
   text-transform: uppercase;
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
   background-size: 220%;
-  transition: all .4s;
+  transition: all .5s;
   }
 
   &:hover, &:active {
