@@ -5,6 +5,7 @@ import { ImportantLabel } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -48,7 +49,7 @@ const ChangePassword = () => {
     repeatNewPassword: "",
   });
   const { user } = useAuth(); // Get user data from context
-  console.log("*****", user);
+  const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
   const [serverError, setServerError] = useState("");
 
@@ -82,6 +83,7 @@ const ChangePassword = () => {
         }
       );
       setErrorMessages({});
+      navigate('/');
       alert("הסיסמא שונתה בהצלחה.");
     } catch (error) {
       console.error("Error changing password:", error);
