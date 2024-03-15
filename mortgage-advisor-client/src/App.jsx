@@ -26,7 +26,6 @@ const Layout = styled.div`
   flex-direction: row;
   width: 100vw;
   height: calc(100vh - 64px); 
-  overflow: hidden; 
 `;
 
 const Wrapper = styled.div`

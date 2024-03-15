@@ -2,45 +2,89 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Label, ImportantLabel } from "../components/label";
-import { Input } from "../components/input";
-import { Button } from "../components/button";
-import { TailWindLink } from "../components/link";
 import { useAuth } from "../context/AuthContext";
 
-const RegistrationWrapper = styled.section`
+const Wrapper = styled.div`
+  padding-top: 8rem;
+  background-color: #f4f7fa;
+  min-height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column; // Align children vertically
+  align-items: center; // Center children horizontally
+  min-height: 91vh;
+
+`;
+
+const Form = styled.form`
   width: 100%;
-  height: 100%;
+  max-width: 800px;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  .dark {
-    background-color: #111827;
-  }
-`;
-
-const HtmlFormWrapper = styled.div`
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid black;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   background-color: white;
-  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 
-  @media  (min-width: 640px){
-    padding: 0 2rem;
-    margin-top:  0 2rem;;
-    margin-bottom:  0 2rem;;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); // two columns on larger screens
   }
 `;
 
-const Title = styled.h1`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1f2937;
+const InputGroup = styled.div`
+  margin-bottom: 1rem;
+`;
 
-  .dark & {
-    color: #ffffff;
+const InputTitle = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
   }
 `;
+
+const Link = styled.a`
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
+`;
+
+const ErrorMessage = styled.div`
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
 const PageTitle = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
@@ -48,12 +92,11 @@ const PageTitle = styled.h1`
   text-align: center;
   margin-bottom: 2rem;
 `;
-const ErrorMessage = styled.div`
-  color: red;
-  margin-bottom: 1rem;
-`;
-const InputLabelWrapper = styled.div`
-  margin-bottom: 1rem;
+const ButtonGroup = styled.div`
+  grid-column: 1 / -1; // Span button group across all columns
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center the button and link vertically
 `;
 
 const Register = () => {
@@ -65,10 +108,18 @@ const Register = () => {
     password: "",
     rePassword: "",
   });
-  const { login } = useAuth();
   const [errorMessages, setErrorMessages] = useState({});
-
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const titles = {
+    pname: "שם פרטי",
+    lname: "שם משפחה",
+    phoneNumber: "מספר טלפון",
+    email: "דואר אלקטרוני",
+    password: "סיסמה",
+    rePassword: "אישור סיסמה",
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -123,123 +174,38 @@ const Register = () => {
         "http://localhost:3001/register",
         formData
       );
-      login(response.data.token);
+      login(response.data.token, response.data.user);
       navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
       alert("Failed to register");
     }
   };
+
   return (
-    <RegistrationWrapper>
-      <HtmlFormWrapper>
-        <PageTitle>דף הרשמה</PageTitle>
-
-        <form onSubmit={handleSubmit}>
-          <Title>משתמש חדש</Title>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="pname">שם פרטי</ImportantLabel>
+    <Wrapper>
+      <PageTitle>דף הרשמה</PageTitle>
+      <Form onSubmit={handleSubmit} >
+        {Object.keys(titles).map((key) => (
+          <InputGroup key={key}>
+            <InputTitle>{titles[key]}</InputTitle>
             <Input
-              type="text"
-              name="pname"
-              id="pname"
-              placeholder="שם פרטי"
-              value={formData.pname}
+              type={key.includes("assword") ? "password" : "text"}
+              name={key}
+              placeholder={titles[key]}
+              value={formData[key]}
               onChange={handleChange}
             />
-            {errorMessages.pname && (
-              <ErrorMessage>{errorMessages.pname}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="lname">שם משפחה</ImportantLabel>
-            <Input
-              type="text"
-              name="lname"
-              id="lname"
-              placeholder="שם משפחה"
-              value={formData.lname}
-              onChange={handleChange}
-            />
-            {errorMessages.lname && (
-              <ErrorMessage>{errorMessages.lname}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="phoneNumber">
-              מספר טלפון נייד
-            </ImportantLabel>
-            <Input
-              type="tel"
-              name="phoneNumber"
-              id="phoneNumber"
-              placeholder="טלפון"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-            />
-            {errorMessages.phoneNumber && (
-              <ErrorMessage>{errorMessages.phoneNumber}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="email">דואר אלקטרוני</ImportantLabel>
-            <Input
-              name="email"
-              id="email"
-              placeholder="דואר אלקטרוני"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            {errorMessages.phoneNumber && (
-              <ErrorMessage>{errorMessages.email}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="password">סיסמה</ImportantLabel>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="סיסמה"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            {errorMessages.password && (
-              <ErrorMessage>{errorMessages.password}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <InputLabelWrapper>
-            <ImportantLabel htmlFor="rePassword">אישור סיסמה</ImportantLabel>
-            <Input
-              type="password"
-              name="rePassword"
-              id="rePassword"
-              placeholder="אישור סיסמה"
-              value={formData.rePassword}
-              onChange={handleChange}
-            />
-            {errorMessages.rePassword && (
-              <ErrorMessage>{errorMessages.rePassword}</ErrorMessage>
-            )}
-          </InputLabelWrapper>
-
-          <Button type="submit">יצירת חשבון</Button>
-          {errorMessages.form && (
-            <ErrorMessage>{errorMessages.form}</ErrorMessage>
-          )}
-
-          <Label>
-            כבר יש חשבון? <TailWindLink href="/login">התחברות</TailWindLink>
-          </Label>
-        </form>
-      </HtmlFormWrapper>
-    </RegistrationWrapper>
+            {errorMessages[key] && <ErrorMessage>{errorMessages[key]}</ErrorMessage>}
+          </InputGroup>
+        ))}
+      <ButtonGroup>
+        <Button type="submit">יצירת חשבון</Button>
+        {errorMessages.form && <ErrorMessage>{errorMessages.form}</ErrorMessage>}
+        <Link href="/login">כבר יש חשבון? התחברות</Link>
+      </ButtonGroup>
+      </Form>
+    </Wrapper>
   );
 };
 

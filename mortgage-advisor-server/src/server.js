@@ -130,34 +130,15 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/contactUs", (req, res) => {
+app.post("/contactUs", async (req, res) => {
   const formData = req.body; // Access form data from the request body
   // Process the form data, such as saving it to a database or sending it via email
   console.log("Received form data:", formData);
-  sendMail(formData).catch((e) => console.log(e));
+  await sendMail(formData).catch((e) => console.log(e));
   // Send a response to the client
   res.status(200).json({ message: "Form submitted successfully" });
 });
 
-// app.post("/recover", async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     // Fetch user's password from the database
-//     const password = await getUserPassword(email);
-
-//     // Send password via email
-//     await recoverMail({ email, password });
-
-//     res
-//       .status(200)
-//       .json({ message: "Password sent successfully to user's email" });
-//   } catch (error) {
-//     console.error("Error sending password:", error);
-//     res
-//       .status(500)
-//       .json({ message: "Failed to send password", error: error.message });
-//   }
-// });
 
 app.post("/requestPasswordReset", async (req, res) => {
   const { email } = req.body;
