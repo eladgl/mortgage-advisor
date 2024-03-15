@@ -204,7 +204,7 @@ const NavBar = () => {
     return links.map((link, index) => {
       //console.log(link)
       return (
-        <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding} bold={link.bold.toString()}>
+        <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding} >
           <NavigationLink href={link.path} className="navigation__link">
             <span> {` 0${index + 1}`} </span> {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
