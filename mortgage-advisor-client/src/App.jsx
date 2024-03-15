@@ -14,6 +14,7 @@ import {
   Recover,
   LoginPage,
   ChangePass,
+  ResetPassword,
 } from "./pages";
 import NavBar from "./components/navBar";
 import styled from "styled-components";
@@ -51,6 +52,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/registration" element={<Register />} />
                 <Route path="/recover" element={<Recover />} />
+                <Route path="/resetPassword/:token" element={<ResetPassword />} />
 
                 <Route path="/newMortgage" element={<PrivateRoute><NewMortgage /></PrivateRoute>} />
                 <Route path="/checkBestMortgage" element={<PrivateRoute><CheckBestMortgage /></PrivateRoute>} />
