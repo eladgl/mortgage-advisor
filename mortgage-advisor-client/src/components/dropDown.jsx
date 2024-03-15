@@ -37,7 +37,7 @@ const DropDown = ({ dropDownLinks }) => {
   };
 
   return (
-    <div className="relative inline-block text-left mx-auto mt-2 md:ml-8">
+    <div className="md:hidden inline-block relative  text-left mx-auto mt-2 md:ml-8">
       <div
         ref={menuRef}
         className={` md:w-auto transition-width duration-1000 ease-in-out ${
@@ -45,8 +45,11 @@ const DropDown = ({ dropDownLinks }) => {
         }`}
       >
         <button
-          className="inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-bg-navbar-custom text-sm font-medium text-gray-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2  text-sm font-medium text-gray-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
           onClick={handleToggleMenu}
+          style={{
+            backgroundColor: "#041a32",
+          }}
         >
           <span className={"hidden md:block"}>תפריט</span>
           <GoTriangleDown size={24} className="hidden md:block md:ml-4 mt-1" />
@@ -61,7 +64,10 @@ const DropDown = ({ dropDownLinks }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 h-screen md:h-fit w-screen  md:w-full rounded-md shadow-lg bg-bg-navbar-custom ring-1 ring-black ring-opacity-5 focus:outline-none transition-transform duration-300 ease-in-out md:translate-x-0">
+        <div           style={{
+          backgroundColor: "#041a32",
+        }}
+         className="origin-top-right absolute right-0 mt-2 h-screen md:h-fit w-screen  md:w-full rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none transition-transform duration-300 ease-in-out md:translate-x-0">
           <div
             className="text-center"
             role="menu"

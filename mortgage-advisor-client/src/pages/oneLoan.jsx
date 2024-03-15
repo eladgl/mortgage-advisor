@@ -24,34 +24,62 @@ const Wrapper = styled.div`
 
   @media (min-width: 640px) {
     padding: 0 2rem;
-    margin-top:  0 2rem;;
-    margin-bottom:  0 2rem;;
+    margin-top: 0 2rem;;
+    margin-bottom: 0 2rem;;
   }
 `;
 
-const HorizontalWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
 `;
 
 const GridCell = styled.div`
-    
+  margin-bottom: 1rem;
 `;
+
+const HorizontalWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem; // Add some space between the label and the checkbox
+`;
+
+const Checkbox = styled(Input)`
+  width: 1.5rem; // Set a specific width for the checkbox
+  height: 1.5rem; // Set a specific height for the checkbox
+`;
+
+
 
 const CustomLink = styled(TailWindLink)`
     margin-right: 8px;
 `;
 
+const Title = styled.h3`
+  text-align: center;
+
+  @media (min-width: 640px) {
+    text-align: left;
+  }
+`;
+
 const ChosenTitles = styled.h1`
-    font-size: 25px;
-    font-weight: 700;
-    color: green;
+  font-size: 25px;
+  font-weight: 700;
+  color: green;
+
 `;
 
 
 const OneLoan = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated } = useAuth();
 
     const [formValues, setFormValues] = useState({
         bankName: '',
@@ -96,13 +124,13 @@ const OneLoan = () => {
         return (
             <>
                 <div className="grid grid-cols-4 grid-rows-1 gap-4" style={{ margin: '3rem 0 -3rem 0' }}>
-                    <p>יש ליצור קשר עם <br />הבנק<Link to="#">דוגמה לבנק<br />יהב</Link></p>
-                    <p>נא לספק ת.זת,<br />פרטי חשבון בנק,<br />פרטים נוספים לפי<br />הצורך</p>
+                    <p>יש ליצור קשר עם <br />הבנק<TailWindLink to="#">דוגמה לבנק<br />יהב</TailWindLink></p>
+                    <p>נא לספק ת.ז,<br />פרטי חשבון בנק,<br />פרטים נוספים לפי<br />הצורך</p>
                     <p>יש לשלוח 3<br />משכורות אחרונות</p>
                     <p>הכסף מתקבל<br />בחשבון</p>
                 </div>
                 <LeftArrow />
-                <p>מחפש נותן שירות או צריך עזרה בתהליך?<Link to="/contactUs">פנה אלינו לפרטים</Link></p>
+                <p>מחפש נותן שירות או צריך עזרה בתהליך?<TailWindLink href="contactUs"> פנה אלינו לפרטים  </TailWindLink></p>
                 <p style={{fontWeight: '700', fontSize:'1.6rem'}} >עלויות משוערות</p>
                 <p>פתיחת תיק: 1000 ש"ח</p>
                 <p>עמלת ביצוע פעולה: 0.1%</p>
@@ -112,7 +140,7 @@ const OneLoan = () => {
 
     const renderGrid = () => {
         return (
-            <div className="grid grid-cols-2 grid-rows-5 gap-8 content-around ">
+            <Grid className="grid grid-cols-2 grid-rows-5 gap-8 content-around ">
                 <GridCell>
                     <ImportantLabel htmlFor="bankName">שם בנק שבו מתהל חשבונך</ImportantLabel>
                     <Select
@@ -154,15 +182,17 @@ const OneLoan = () => {
                         handleSelectChange={handleInputChange} />
                 </GridCell>
                 <GridCell>
-                    <HorizontalWrapper>
-                        <Label>ידוע לי שההצעה היא רק לאומדן בלבד</Label>
-                        <Input
-                            type="checkbox"
-                            id="acknowledge"
-                            name="acknowledge"
-                            checked={formValues.acknowledge}
-                            onChange={handleInputChange} />
-                    </HorizontalWrapper>
+                <HorizontalWrapper>
+      <div className="flex">
+        <Label className="ml-4">ידוע לי שההצעה היא רק לאומדן בלבד</Label>
+        <Checkbox
+          type="checkbox"
+          id="acknowledge"
+          name="acknowledge"
+          checked={formValues.acknowledge}
+          onChange={handleInputChange} />
+      </div>
+    </HorizontalWrapper>
                 </GridCell>
                 <GridCell></GridCell>
                 <GridCell>
@@ -190,15 +220,15 @@ const OneLoan = () => {
                 <GridCell>
                     <Button type="submit" disabled={!isFormValid} onClick={handleCalc}>חשב</Button>
                 </GridCell>
-            </div>
+            </Grid>
         );
     };
 
     return (
 
         <Wrapper >
-            <h3 className="pt-4">מעוניין לקחת הלוואה רגילה</h3>
-            <h3>מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
+            <h3  className="pt-4">מעוניין לקחת הלוואה רגילה</h3>
+            <h3 >מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
             <ChosenTitles>אני מעוניין לקחת הלוואה אחת</ChosenTitles>
             {isButtonClicked ? renderAfterCalc() : renderGrid()}
             {showErrorLabel && <ErrorLabel title="שגיאת חישוב" message="משתמש לא מחובר"/>}

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Label = styled.label`
   position: relative;
-  display: block;
+  display: block;  
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;

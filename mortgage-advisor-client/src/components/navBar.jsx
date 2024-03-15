@@ -225,7 +225,6 @@ const NavBar = () => {
           <NavigationButton className="navigation__button" htmlFor="navi-toggle">
             <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
           </NavigationButton>
-
           <NavigationBackground className="navigation__background  ">
             <NavigationNav className="navigation__nav">
               <NavigationList className="navigation__list ">
