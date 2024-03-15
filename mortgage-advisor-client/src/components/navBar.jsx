@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled, {css} from "styled-components";
+import { Link, useLocation  } from "react-router-dom";
 import { linksConfig } from "../pages/config/linksConfig";
 import * as access from "@access";
 import * as types from "../pages/constants/pagesTypes";
-import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import SvgIcon from "./svgIcon";
@@ -19,7 +18,12 @@ const RightPane = styled.div`
   justify-content: flex-start; /* Changed from 'top' to 'flex-start' */
   width: 400px;
 `;
-
+const activeLinkStyle = css`
+  background-color: #04bbaa; /* Active link background color */
+  color: black; /* Active link text color */
+  font-weight: bold; /* Active link font weight */
+  border-right: 4px solid #333; /* Active link right border */
+`;
 const LinkContainer = styled.div`
   padding-top: 0; /* Changed from 1.2rem to 0 to remove initial top padding */
   display: flex;
@@ -39,7 +43,7 @@ const NavigationButton = styled.label`
   width: 4rem;
   position: fixed;
   top: 8rem;
-  right: 3.5rem;
+  right: 2rem;
   border-radius: 50%;
   z-index: 2000;
   opacity: .5;
@@ -155,7 +159,6 @@ const NavigationItem = styled.li`
 `;
 
 const NavigationLink = styled(Link)`
-  &:link, &:visited {
   display: inline-block;
   font-size: 1rem;
   font-weight: 300;
@@ -166,28 +169,30 @@ const NavigationLink = styled(Link)`
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
   background-size: 230%;
   transition: all .5s;
-  }
 
   &:hover, &:active {
     background-position: 100%;
-  color: #55c57a;
-  transform: translateX(1rem);
+    color: #55c57a;
+    transform: translateX(1rem);
   }
 
-  &:link span, &:visited span {
-    margin-right: 1.5rem;
-    display: inline-block;
-  }
+  ${props => props.isActive && activeLinkStyle}
 `;
 
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
+  const { pathname } = useLocation(); 
 
+  const checkActiveLink = (currentPath, linkPath, linkRoot) => {
+    if (currentPath === '/' && linkPath === '/') return true;
+    return currentPath == linkPath || (currentPath.startsWith(linkRoot) && linkPath !== '/');
+  };
   const registeredDropDownLinks = linksConfig.map((link) => ({
     name: link.title,
     path: link.path,
+    root: link.root,
     icon: link.icon,
     padding: link.padding,
     bold: location.pathname === link.path || location.pathname === link.secondaryPath,
@@ -197,15 +202,12 @@ const NavBar = () => {
     { name: "התחבר", path: "/login" },
     { name: "רישום", path: "/registration" },
   ];
-
   const renderLi = (links) => {
-
-
     return links.map((link, index) => {
-      //console.log(link)
+      const isActive = checkActiveLink(pathname, link.path, link.root);
       return (
         <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding}>
-          <NavigationLink to={link.path} className="navigation__link mr-4 font-bold text-xl  border-r-4 border-r-gray-700 border-b-gray-600">
+          <NavigationLink to={link.path} isActive={isActive} className="border-r-4 border-gray-800" >
              {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
           </NavigationLink>
@@ -224,9 +226,9 @@ const NavBar = () => {
             <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
           </NavigationButton>
 
-          <NavigationBackground className="navigation__background ">
+          <NavigationBackground className="navigation__background  ">
             <NavigationNav className="navigation__nav">
-              <NavigationList className="navigation__list">
+              <NavigationList className="navigation__list ">
                 {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}
               </NavigationList>
             </NavigationNav>

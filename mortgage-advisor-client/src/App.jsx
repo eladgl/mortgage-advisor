@@ -15,6 +15,7 @@ import {
   LoginPage,
   ChangePass,
   ResetPassword,
+  PageNotFound,
 } from "./pages";
 import NavBar from "./components/navBar";
 import styled from "styled-components";
@@ -42,26 +43,23 @@ const App = () => {
         <AuthProvider>
           <TopNavBar />
           <Layout className="h-screen mt-24">
-            <div className="hidden md:block ">
+            <div className="hidden md:block">
               <NavBar />
             </div>
             <div className="w-full h-full">
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/contactUs" element={<ContactUs />} />
+                <Route path="/contact" element={<ContactUs />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/registration" element={<Register />} />
                 <Route path="/recover" element={<Recover />} />
                 <Route path="/resetPassword/:token" element={<ResetPassword />} />
-
-                <Route path="/newMortgage" element={<PrivateRoute><NewMortgage /></PrivateRoute>} />
-                <Route path="/checkBestMortgage" element={<PrivateRoute><CheckBestMortgage /></PrivateRoute>} />
-                <Route path="/normalMortgage" element={<PrivateRoute><NormalMortgage /></PrivateRoute>} />
-                <Route path="/upTo100kLoan" element={<PrivateRoute><UpTo100kLoan /></PrivateRoute>} />
-                <Route path="/oneLoan" element={<PrivateRoute><OneLoan /></PrivateRoute>} />
-                <Route path="/fewLoans" element={<PrivateRoute><FewLoans /></PrivateRoute>} />
-                <Route path="/over100kLoan" element={<PrivateRoute><Over100kLoan /></PrivateRoute>} />
+                <Route path="/mortgages/new/checkBest" element={<PrivateRoute><CheckBestMortgage /></PrivateRoute>} />
+                <Route path="/loans/normal/upTo100k/one" element={<PrivateRoute><OneLoan /></PrivateRoute>} />
+                <Route path="/loans/normal/upTo100k/few" element={<PrivateRoute><FewLoans /></PrivateRoute>} />
+                <Route path="/loans/normal/over100k" element={<PrivateRoute><Over100kLoan /></PrivateRoute>} />
                 <Route path="/changePassword" element={<PrivateRoute><ChangePass /></PrivateRoute>} />
+                <Route path="*" element={<PageNotFound />} /> 
               </Routes>
             </div>
           </Layout>
