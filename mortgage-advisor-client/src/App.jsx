@@ -38,7 +38,7 @@ const App = () => {
       <Router>
         <AuthProvider>
           <TopNavBar />
-          <Layout className="mt-28 h-screen ">
+          <Layout className="h-screen ">
             <div className="hidden md:block ">
               <NavBar />
             </div>
