@@ -25,7 +25,20 @@ const LinkContainer = styled.div`
   flex-direction: row;
 `;
 
+const NavigationDiv = styled.div`
+  overflow: hidden;
+`;
+
 const NavBar = () => {
+  const user = {};
+  const registeredDropDownLinks = linksConfig.map((link) => ({
+    name: link.title,
+    path: link.path,
+  }));
+
+  const unRegisteredDropDownLinks = [
+    { name: "Register", path: "/registration" },
+  ];
   const location = useLocation();
 
   const renderLinks = () => {
@@ -44,7 +57,38 @@ const NavBar = () => {
     ));
   };
 
-  return <RightPane>{renderLinks()}</RightPane>;
+  const renderLi = (links) => {
+    console.log(links);
+    return links.map( (link, index) =>{
+      return <li className="navigation__item"><a href={link.path} className="navigation__link"><span>{` 0${index+1} `}</span>{link.name}</a></li>
+    });
+  };
+
+  const renderRightNavBar = () => {
+    return (
+      <nav className="bg-blue-400  fixed top-0 w-full" style={{ backgroundColor: '#041a32', zIndex: 10000}}>
+        <div className="flex justify-between items-center sm:px-4 py-3 md:px-10 md:py-5">
+      <NavigationDiv className="navigation">
+        <input type="checkbox" className="navigation__checkbox" id="navi-toggle" />
+  
+        <label for="navi-toggle" className="navigation__button">
+          <span className="navigation__icon">&nbsp;</span>
+        </label>
+  
+        <div className="navigation__background">&nbsp;</div>
+  
+        <nav className="navigation__nav">
+          <ul className="navigation__list">
+            {renderLi(!user.name ? registeredDropDownLinks : unRegisteredDropDownLinks)}
+          </ul>
+        </nav>
+      </NavigationDiv>
+      </div>
+      </nav>
+    )
+  }
+
+  return <RightPane>{renderRightNavBar()}</RightPane>;
 };
 
 NavBar.propTypes = {
