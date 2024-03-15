@@ -93,7 +93,7 @@ const Login = () => {
         <GridCell>
           <Label>
             {" עדיין לא רשום? "}
-            <TailWindLink href="register">הרשם</TailWindLink>
+            <TailWindLink href="registration">הרשם</TailWindLink>
           </Label>
         </GridCell>
       </form>
