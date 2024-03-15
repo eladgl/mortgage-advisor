@@ -31,7 +31,6 @@ const NavigationDiv = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  //width: 400px;
 `;
 
 const NavigationButton = styled.label`
@@ -102,9 +101,10 @@ const NavigationCheckbox = styled.input`
   display: none;
 
   &:checked ~ .navigation__background {
-    height: 100%;
+    height: 150%;
     width: 100%;
     border-radius: 0;
+    border: 2px 0px  0px 2px solid black;
     right: 0rem; 
   }
 
@@ -130,12 +130,10 @@ const NavigationCheckbox = styled.input`
 
 const NavigationList = styled.ul`
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  list-style: none;
-  text-align: right;
-  width: 100%;
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50%;
 `;
 
 const NavigationNav = styled.nav`
@@ -152,7 +150,7 @@ const NavigationNav = styled.nav`
 const NavigationItem = styled.li`
   margin: 1rem;
   padding-right: ${(props) => props.paddings}rem;
-  font-weight: ${(props) => props.bold === 'true' && 700 };
+  font-weight: ${(props) => props.bold === 'true' && 700};
 `;
 
 const NavigationLink = styled.a`
@@ -165,7 +163,7 @@ const NavigationLink = styled.a`
   text-decoration: none;
   text-transform: uppercase;
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
-  background-size: 220%;
+  background-size: 230%;
   transition: all .5s;
   }
 
@@ -195,18 +193,19 @@ const NavBar = () => {
   }));
 
   const unRegisteredDropDownLinks = [
-    { name: "התחבר", path: "/registration" },
+    { name: "התחבר", path: "/login" },
+    { name: "רישום", path: "/registration" },
   ];
 
   const renderLi = (links) => {
-    
+
 
     return links.map((link, index) => {
       //console.log(link)
       return (
         <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding}>
           <NavigationLink href={link.path} className="navigation__link">
-            <span> {` 0${index + 1}`} </span> {link.name}
+            <span> {` `} </span> {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
           </NavigationLink>
         </NavigationItem>
@@ -216,23 +215,23 @@ const NavBar = () => {
 
   const renderRightNavBar = () => {
     return (
-          <NavigationDiv className="navigation">
-            <div>
-            <NavigationCheckbox type="checkbox" className="navigation__checkbox" id="navi-toggle" />
+      <NavigationDiv className="navigation">
+        <div>
+          <NavigationCheckbox type="checkbox" className="navigation__checkbox" id="navi-toggle" />
 
-            <NavigationButton className="navigation__button" htmlFor="navi-toggle">
-              <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
-            </NavigationButton>
+          <NavigationButton className="navigation__button" htmlFor="navi-toggle">
+            <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
+          </NavigationButton>
 
-            <NavigationBackground className="navigation__background">
-              <NavigationNav className="navigation__nav">
-                <NavigationList className="navigation__list">
-                  {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}
-                </NavigationList>
-              </NavigationNav>
-            </NavigationBackground>
-            </div>
-          </NavigationDiv>
+          <NavigationBackground className="navigation__background">
+            <NavigationNav className="navigation__nav">
+              <NavigationList className="navigation__list">
+                {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}
+              </NavigationList>
+            </NavigationNav>
+          </NavigationBackground>
+        </div>
+      </NavigationDiv>
     )
   }
 

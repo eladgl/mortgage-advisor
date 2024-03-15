@@ -49,7 +49,7 @@ const FewLoans = () => {
             <div>
                 <AlertLabel>אין לך אפשרות לקחת כמה הלוואות עבור סכום הקטן מ100 אלף ש"ח</AlertLabel>
                 <p style={{fontWeight: '700', fontSize:'1.6rem'}} >אופציות אחרות</p>
-                <div className="grid grid-cols-3 grid-rows-1 gap-4" style={{ margin: '3rem 0 -3rem 0'}}>
+                <div className="grid grid-cols-4 grid-rows-1 gap-4" style={{ margin: '3rem 0 -3rem 0'}}>
                     <p>הגשת בקשה <br />פרטנית בבנק</p>
                     <p>הבנק בודק את<br />הבקשה</p>
                     <p>החלטה של הבנק<br />האם לאשר<br />הלוואה פרטנית</p>
