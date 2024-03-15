@@ -16,12 +16,12 @@ const RightPane = styled.div`
   flex-direction: column;
   border-left: 1px solid black;
   height: 100%;
-  justify-content: top;
+  justify-content: flex-start; /* Changed from 'top' to 'flex-start' */
   width: 400px;
 `;
 
 const LinkContainer = styled.div`
-  padding-top: 1.2rem;
+  padding-top: 0; /* Changed from 1.2rem to 0 to remove initial top padding */
   display: flex;
   flex-direction: row;
 `;
@@ -55,6 +55,7 @@ const NavigationButton = styled.label`
     top: 1rem;
   }
 `;
+
 
 const NavigationIcon = styled.span`
    position: relative;
@@ -90,7 +91,7 @@ const NavigationBackground = styled.div`
   width: 6rem;
   border-radius: 50%;
   position: absolute;
-  top: -8rem;
+  top: -14rem;
   right: 6.5rem; 
   background-image: radial-gradient(#041132, #041a32);
   z-index: 1000;
@@ -204,8 +205,8 @@ const NavBar = () => {
       //console.log(link)
       return (
         <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding}>
-          <NavigationLink to={link.path} className="navigation__link">
-            <span> {` `} </span> {link.name}
+          <NavigationLink to={link.path} className="navigation__link mr-4 font-bold text-xl  border-r-4 border-r-gray-700 border-b-gray-600">
+             {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
           </NavigationLink>
         </NavigationItem>
@@ -215,7 +216,7 @@ const NavBar = () => {
 
   const renderRightNavBar = () => {
     return (
-      <NavigationDiv className="navigation">
+      <NavigationDiv className="navigation ">
         <div>
           <NavigationCheckbox type="checkbox" className="navigation__checkbox" id="navi-toggle" />
 
@@ -223,7 +224,7 @@ const NavBar = () => {
             <NavigationIcon className="navigation__icon">&nbsp;</NavigationIcon>
           </NavigationButton>
 
-          <NavigationBackground className="navigation__background">
+          <NavigationBackground className="navigation__background ">
             <NavigationNav className="navigation__nav">
               <NavigationList className="navigation__list">
                 {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}

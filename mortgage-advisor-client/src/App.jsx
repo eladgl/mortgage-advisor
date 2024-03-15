@@ -26,7 +26,8 @@ const Layout = styled.div`
   display: flex;
   flex-direction: row;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64px); 
+  overflow: hidden; 
 `;
 
 const Wrapper = styled.div`
@@ -39,7 +40,7 @@ const App = () => {
       <Router>
         <AuthProvider>
           <TopNavBar />
-          <Layout className="h-screen ">
+          <Layout className="h-screen mt-24">
             <div className="hidden md:block ">
               <NavBar />
             </div>
