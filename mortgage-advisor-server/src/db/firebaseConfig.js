@@ -3,6 +3,9 @@ import { initializeApp } from "firebase/app";
 import admin from "firebase-admin";
 // Import dotenv to load environment variables
 import "dotenv/config";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 // Firebase configuration
 const firebaseConfig = {
@@ -30,10 +33,13 @@ const db = admin.firestore();
 // Add a user to Firestore
 async function registerUser(userData) {
   const { password, rePassword, ...userInfo } = userData;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
   const newUserRef = db.collection("users").doc();
 
   await newUserRef.set({
     ...userInfo,
+    password: hashedPassword,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
@@ -41,7 +47,7 @@ async function registerUser(userData) {
   const userToReturn = {
     id: newUserRef.id,
     ...savedUser.data(),
-    password: undefined, // Remove sensitive data
+    password: undefined,
   };
 
   return userToReturn;
@@ -57,8 +63,9 @@ async function loginUser(email, password) {
   const userDoc = snapshot.docs[0];
   const userData = userDoc.data();
 
-  // Verify the password securely (hash comparison, etc.)
-  if (userData.password === password) {
+  const passwordMatch = await bcrypt.compare(password, userData.password);
+
+  if (passwordMatch) {
     // Placeholder for password check
     const { password, ...userWithoutPassword } = userData;
     return { id: userDoc.id, ...userWithoutPassword };
