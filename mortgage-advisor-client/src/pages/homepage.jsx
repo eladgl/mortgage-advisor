@@ -13,7 +13,7 @@ const HomePage = () => {
     <h1 className="text-4xl text-center text-black font-bold">ברוכים הבאים לאתר שלנו</h1>
     <div className='flex flex-col mt-8  '>
     <h1 className="text-4xl text-center text-black font-bold">שרון מור - 207470329</h1> 
-    <h1 className="text-4xl text-center text-black font-bold">אלעד גולדנברג - 11111111</h1> 
+    <h1 className="text-4xl text-center text-black font-bold">אלעד גולדנברג - 315040519</h1> 
     </div> 
   
 
