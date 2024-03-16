@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host=$REACT_APP_API_BASE_URL",
+    "dev": "vite --host=localhost",
+    "client": "vite --host=172.31.4.147",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
