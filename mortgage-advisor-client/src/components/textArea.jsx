@@ -17,8 +17,8 @@ const StyledTextArea = styled.textarea`
 
 const TextArea = ({ handleTextAreaChange, id, name, required, labelText }) => {
     const renderLabel = () => (
-        required ? <ImportantLabel for={name}>{labelText}</ImportantLabel> 
-                 : <Label for={name}>{labelText}</Label>
+        required ? <ImportantLabel htmlFor={name}>{labelText}</ImportantLabel> 
+                 : <Label htmlFor={name}>{labelText}</Label>
     );
 
     const handleChange = (e) => {
@@ -43,7 +43,7 @@ const TextArea = ({ handleTextAreaChange, id, name, required, labelText }) => {
 };
 
 TextArea.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    options: PropTypes.arrayOf(PropTypes.string),
     id: PropTypes.string,
     name: PropTypes.string,
     handleTextAreaChange: PropTypes.func,

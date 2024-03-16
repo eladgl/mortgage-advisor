@@ -64,17 +64,31 @@ const FooterDiv = styled.footer`
 `;
 
 const Footer = () => {
+  const handleClick = (e) => {
+    if (e.target.classList.contains('footer__link')) {
+      e.preventDefault();
+      const href = e.target.getAttribute('href');
+      const target = e.target.getAttribute('target');
+      if (target === '_blank') {
+        window.open(href, '_blank');
+      } else {
+        // Navigate to the specified URL in the same page
+        window.location.href = href;
+      }
+    }
+  };
+
     return (
-        <FooterDiv className="footer">
+        <FooterDiv className="footer" >
             <div className="footer__logo-box justify-center flex">
                 <img src={logo} alt="Full logo" className="footer__logo" />
             </div>
             <div className="row">
                 <div className="col-1-of-2">
                     <div className="footer__navigation">
-                        <ul className="footer__list">
-                            <li className="footer__item"><a to="#" className="footer__link">עלינו</a></li>
-                            <li className="footer__item"><a to="contact" className="footer__link">צרו קשר</a></li>
+                        <ul className="footer__list" onClick={ handleClick }>
+                            <li className="footer__item"><a href="#" className="footer__link">עלינו</a></li>
+                            <li className="footer__item"><a href="/contact" className="footer__link">צרו קשר</a></li>
                             <li className="footer__item"><a href="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" target="_blank" className="footer__link">תקנון</a></li>
                         </ul>
                     </div>

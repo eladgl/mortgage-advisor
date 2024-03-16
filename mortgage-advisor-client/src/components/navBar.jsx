@@ -176,7 +176,7 @@ const NavigationLink = styled(Link)`
     transform: translateX(1rem);
   }
 
-  ${props => props.isActive && activeLinkStyle}
+  ${props => props.$isactive && activeLinkStyle}
 `;
 
 
@@ -207,7 +207,7 @@ const NavBar = () => {
       const isActive = checkActiveLink(pathname, link.path, link.root);
       return (
         <NavigationItem key={`${link}-${index}`} className="navigation__item" paddings={link.padding}>
-          <NavigationLink to={link.path} isActive={isActive} className="border-r-4 border-gray-800" >
+          <NavigationLink to={link.path} $isactive={isActive} className="border-r-4 border-gray-800" >
              {link.name}
             {link.icon && <span><SvgIcon name={access.icon(`icons.${link.icon}`)} /></span>}
           </NavigationLink>
