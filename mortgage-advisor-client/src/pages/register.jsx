@@ -11,15 +11,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column; // Align children vertically
   align-items: center; // Center children horizontally
-  min-height: 91vh;
+  min-height: 93vh;
+  font-size: 14px;
+
 
 `;
 
 const Form = styled.form`
   width: 100%;
-  max-width: 800px;
+  max-width: 400px;
   padding: 2rem;
-  margin: auto;
+  margin-top: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: white;
@@ -31,6 +33,8 @@ const Form = styled.form`
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr); // two columns on larger screens
+    max-width: 800px;
+
   }
 `;
 
@@ -58,7 +62,6 @@ const Button = styled.button`
   border-radius: 4px;
   background-color: #007bff;
   color: white;
-  font-size: 1rem;
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
@@ -86,11 +89,11 @@ const ErrorMessage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-size: 1.5rem;
   font-weight: bold;
   color: #333;
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 18px;
 `;
 const ButtonGroup = styled.div`
   grid-column: 1 / -1; // Span button group across all columns

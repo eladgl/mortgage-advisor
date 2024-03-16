@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import axios from "axios";
-
 import { ImportantLabel, Label } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
@@ -14,33 +11,40 @@ import { Title } from "../components/Title";
 import * as access from "@access";
 
 const Wrapper = styled.div`
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 93vh;
+  background-color: #f4f7fa;
+  font-size: 14px;
+`;
 
-  border: 1px solid black;
+const Form = styled.form`
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  margin: auto;
+  margin-top: 72px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   background-color: white;
-  border-radius: 1rem;
-  height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 
-  @media (min-width: 640px) {
-    padding: 2rem 2rem;
-    margin-top:  0 2rem;;
-    margin-bottom:  0 2rem;;
-  }
 `;
 
 const GridCell = styled.div`
-    
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 `;
 
 const TwoCells = styled(GridCell)`
-    grid-column: span 2;
+  grid-column: span 2;
 `;
 
 const ContactUs = () => {
-  const [message, setMessage] = useState('0');
-
+  const [message, setMessage] = useState('');
   const [formValues, setFormValues] = useState({
     fname: '',
     lname: '',
@@ -53,19 +57,19 @@ const ContactUs = () => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    const isFormValid =
+    setIsFormValid(
       formValues.fname !== '' &&
       formValues.lname !== '' &&
       formValues.phone !== '' &&
       formValues.email !== '' &&
       formValues.reason !== '' &&
-      formValues.contactMessage !== '';
-
-    setIsFormValid(isFormValid);
+      formValues.contactMessage !== ''
+    );
   }, [formValues]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isFormValid) return;
     try {
       const response = await axios.post("http://localhost:3001/contactUs", formValues);
       setMessage("success");
@@ -76,30 +80,14 @@ const ContactUs = () => {
   };
 
   const handleInputChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  useEffect(() => {
-    // Function to fetch data from server using axios
-    const fetchData = async () => {
-      try {
-        // Make a GET request to the server using axios
-        const response = await axios.get("http://localhost:3001/test");
-        console.log(response.data.message); // Access data directly from axios response
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-        console.log("Failed to connect to server");
-      }
-    };
-
-    fetchData();
-  }, []); // Empty dependency array means this effect runs once on component mount
-  // Empty array means this effect runs once on mount
-
-  const renderGrid = () => {
-    return (
-      <div className="grid grid-cols-2 grid-rows-4 gap-4">
+  const renderForm = () => (
+    <Form onSubmit={handleSubmit}>
+      <Title>טופס יצירת קשר</Title>
+      <div className="grid grid-cols-2 gap-4">
         <GridCell>
           <ImportantLabel htmlFor="fname">שם פרטי</ImportantLabel>
           <Input
@@ -109,7 +97,8 @@ const ContactUs = () => {
             placeholder="שם פרטי"
             value={formValues.fname}
             onChange={handleInputChange}
-            required />
+            required
+          />
         </GridCell>
         <GridCell>
           <ImportantLabel htmlFor="lname">שם משפחה</ImportantLabel>
@@ -119,7 +108,8 @@ const ContactUs = () => {
             name="lname"
             placeholder="שם משפחה"
             value={formValues.lname}
-            onChange={handleInputChange} />
+            onChange={handleInputChange}
+          />
         </GridCell>
         <GridCell>
           <ImportantLabel htmlFor="phone">מספר טלפון נייד</ImportantLabel>
@@ -129,7 +119,8 @@ const ContactUs = () => {
             name="phone"
             placeholder="טלפון"
             value={formValues.phone}
-            onChange={handleInputChange} />
+            onChange={handleInputChange}
+          />
         </GridCell>
         <GridCell>
           <ImportantLabel htmlFor="email">דואר אלקטרוני</ImportantLabel>
@@ -139,53 +130,48 @@ const ContactUs = () => {
             name="email"
             placeholder="דואר אלקטרוני"
             value={formValues.email}
-            onChange={handleInputChange} />
+            onChange={handleInputChange}
+          />
         </GridCell>
         <TwoCells>
-          <ImportantLabel>נושא הפנייה</ImportantLabel>
+          <ImportantLabel htmlFor="reason">נושא הפנייה</ImportantLabel>
           <Select
             id="reason"
             name="reason"
             options={ access.general('lists.contactReasons') }
             value={formValues.reason}
-            handleSelectChange={handleInputChange} />
+            onChange={handleInputChange}
+          />
         </TwoCells>
         <TwoCells>
           <TextArea
-            labelText="נושא הפנייה"
-            required
             id="contactMessage"
             name="contactMessage"
+            placeholder="נושא הפנייה"
             value={formValues.contactMessage}
-            handleTextAreaChange={handleInputChange} />
+            onChange={handleInputChange}
+            required
+          />
         </TwoCells>
         <div className="col-span-2 flex justify-center">
-        <Button type="submit" disabled={!isFormValid} className="mt-4">שלח</Button>
+          <Button type="submit" disabled={!isFormValid}>שלח</Button>
+        </div>
       </div>
-      </div>
-    );
+    </Form>
+  );
+
+  const renderSuccessMessage = () => (
+    <Wrapper>
+      <Title>בקשתך התקבלה ניצור איתך קשר בהקדם</Title>
+    </Wrapper>
+  );
+
+  const renderFailureMessage = () => {
+    alert('בקשה נכשלה, בבקשה תנסה שוב מאוחר יותר');
+    return renderForm(); // Optionally redirect or retry
   };
 
-
-  if (message === 'success')
-    return (
-      <Wrapper >
-        <Title>בקשתך התקבלה ניצור איתך קשר בהקדם</Title>
-      </Wrapper>
-    );
-  else {
-    if (message === 'failure') {
-      alert('בקשה נכשלה, בבקשה תנסה שוב מאוחר יותר');
-    }
-    return (
-      <Wrapper>
-        <Title>טופס יצירת קשר</Title>
-        <form onSubmit={handleSubmit}>
-          {renderGrid()}
-        </form>
-      </Wrapper>
-    );
-  }
+  return message === 'success' ? renderSuccessMessage() : message === 'failure' ? renderFailureMessage() : renderForm();
 };
 
 export default ContactUs;

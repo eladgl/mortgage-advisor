@@ -45,7 +45,7 @@ const DropDown = ({ dropDownLinks }) => {
         }`}
       >
         <button
-          className="inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2  text-sm font-medium text-gray-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm md:px-4 py-2  text-sm font-medium text-gray-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
           onClick={handleToggleMenu}
           style={{
             backgroundColor: "#041a32",
