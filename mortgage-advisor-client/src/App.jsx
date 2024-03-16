@@ -22,6 +22,7 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/privateRoute";
 import Footer from "./components/footer";
 
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,11 +36,11 @@ const Layout = styled.div`
   flex: 1; // Allows the layout to expand and fill the available space
   width: 100%;
   background-color: #f4f7fa;
-
 `;
 
 const App = () => {
   return (
+    <>
     <Wrapper>
       <Router>
         <AuthProvider>
@@ -65,10 +66,12 @@ const App = () => {
               </Routes>
             </div>
           </Layout>
-          <Footer />
         </AuthProvider>
       </Router>
+      
     </Wrapper>
+    <Footer />
+    </>
   );
 };
 

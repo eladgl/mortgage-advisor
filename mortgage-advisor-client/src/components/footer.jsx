@@ -7,9 +7,10 @@ import logo from '../assets/images/logo.png';
 
 const FooterDiv = styled.footer`
     background-color: #333;
-    padding: 10rem 0;
+    padding: 5rem 0;
     font-size: 1.4rem;
     color: #f7f7f7; 
+    z-index: 0;
 
   .footer__logo-box {
     text-align: center;
@@ -72,8 +73,8 @@ const Footer = () => {
                 <div className="col-1-of-2">
                     <div className="footer__navigation">
                         <ul className="footer__list">
-                            <li className="footer__item"><Link to="#" className="footer__link">עלינו</Link></li>
-                            <li className="footer__item"><Link to="contact" className="footer__link">צרו קשר</Link></li>
+                            <li className="footer__item"><a to="#" className="footer__link">עלינו</a></li>
+                            <li className="footer__item"><a to="contact" className="footer__link">צרו קשר</a></li>
                             <li className="footer__item"><a href="https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" target="_blank" className="footer__link">תקנון</a></li>
                         </ul>
                     </div>
