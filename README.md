@@ -25,7 +25,7 @@ To run this project on your local machine, follow these steps:
 1. **Root Folder:**
    - Navigate to the root folder of the project.
    - Run the command `npm run start` to start the project. This will start both the frontend and backend parts of the application.
-### Another Way - Run Client and Server Seperatly (2 terminals)
+### Another Way - Run Client and Server Separately (2 terminals)
 2. **Client:**
    - Go to the `client` directory within the project folder.
    - Run `npm run dev` to start the development server for the React frontend.
