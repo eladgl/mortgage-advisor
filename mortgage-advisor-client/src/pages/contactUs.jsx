@@ -7,6 +7,7 @@ import { Button } from "../components/button";
 import Select from "../components/select";
 import TextArea from "../components/textArea";
 import { Title } from "../components/Title";
+import config from "../access/configs/config";
 
 import * as access from "@access";
 
@@ -71,7 +72,7 @@ const ContactUs = () => {
     event.preventDefault();
     if (!isFormValid) return;
     try {
-      const response = await axios.post("http://localhost:3001/contactUs", formValues);
+      const response = await axios.post(`http://${config.URL}:3001/contactUs`, formValues);
       setMessage("success");
     } catch (error) {
       console.error("Error submitting form:", error);
