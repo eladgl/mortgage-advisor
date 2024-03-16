@@ -21,10 +21,8 @@ html {
 body {
   font-family: "Lato", sans-serif;
   font-weight: 200;
-  /*font-size: 16px;*/
   line-height: 1.7;
   color: var(--color-grey-dark);
-
 }
 
 :root {
@@ -47,50 +45,6 @@ body {
 
   --color-white: #fff;
   --color-black: #000;
-}
-
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-10rem);
-  }
-
-  80% {
-    transform: translateX(1rem);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes moveInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(10rem);
-  }
-
-  80% {
-    transform: translateX(-1rem);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes moveInBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(3rem);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
 }
 
 *,
