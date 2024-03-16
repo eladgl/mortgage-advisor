@@ -8,7 +8,19 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const CarouselImage = styled.img`
     content: '';
     width: auto;
-    height: 400px;
+    height: auto;
+
+    @media (max-width: 1200px) {
+        height: 300px;
+    }
+
+    @media (max-width: 768px) {
+        height: 100px;
+    }
+
+    @media (max-width: 400) {
+        height: 50px;
+    }
 `;
 
 const CarouselWrapper = styled.div`
