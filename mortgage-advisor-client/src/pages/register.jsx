@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import config from "../access/configs/config";
 
 const Wrapper = styled.div`
   padding-top: 8rem;
@@ -174,7 +175,7 @@ const Register = () => {
     if (!validateForm()) return;
     try {
       const response = await axios.post(
-        "http://localhost:3001/register",
+        `http://${config.URL}:3001/register`,
         formData
       );
       login(response.data.token, response.data.user);

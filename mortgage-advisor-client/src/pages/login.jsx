@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import config from "../access/configs/config";
 
 
 const Wrapper = styled.div`
@@ -86,7 +87,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/login",
+        `http://${config.URL}:3001/login`,
         formValues
       );
       console.log("Login successful:", response.data);

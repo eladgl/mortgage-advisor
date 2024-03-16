@@ -4,7 +4,8 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "start": "concurrently \"cd mortgage-advisor-server && npm run server\" \"cd mortgage-advisor-client && npm run dev\""
+        "start": "concurrently \"cd mortgage-advisor-server && npm run server\" \"cd mortgage-advisor-client && npm run dev\"",
+        "client": "concurrently \"cd mortgage-advisor-server && npm run server\" \"cd mortgage-advisor-client && npm run client\""
     },
     "devDependencies": {
         "concurrently": "^7.6.0"

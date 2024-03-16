@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // Import axios to make a request to your server
 import { isTokenValid } from "../utils/auth";
-
+import config from "../access/configs/config";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       if (isTokenValid()) {
         try {
           // Assume you have an endpoint to fetch user data based on the token
-          const response = await axios.get("http://localhost:3001/userData", {
+          const response = await axios.get(`http://${config.URL}:3001/userData`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

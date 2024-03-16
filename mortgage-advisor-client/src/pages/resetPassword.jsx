@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ImportantLabel } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
+import config from "../access/configs/config";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -56,7 +57,7 @@ const ResetPassword = () => {
     // Verify the token when the component loads
     const verifyToken = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/verifyResetToken/${token}`);
+        const response = await axios.get(`http://${config.URL}:3001/verifyResetToken/${token}`);
         console.log(response.data); // Handle response appropriately
       } catch (error) {
         console.error("Error verifying token:", error);
@@ -85,7 +86,7 @@ const ResetPassword = () => {
     setServerError(""); // Clear previous server error
 
     try {
-      await axios.post("http://localhost:3001/resetPassword", {
+      await axios.post(`http://${config.URL}:3001/resetPassword`, {
         token,
         newPassword: formValues.newPassword,
       });

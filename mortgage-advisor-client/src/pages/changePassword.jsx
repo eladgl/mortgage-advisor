@@ -7,6 +7,7 @@ import { Button } from "../components/button";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../components/Title";
+import config from "../access/configs/config";
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -79,7 +80,7 @@ const ChangePassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/changePassword",
+        `http://${config.URL}:3001/changePassword`,
         {
           oldPassword: formValues.oldPassword,
           newPassword: formValues.newPassword,

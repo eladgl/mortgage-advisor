@@ -17,6 +17,7 @@ import {
 import { sendMail, recoverMail } from "./utilities/mails.js";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto'; // For generating random tokens
+import config from "./access/configs/config.js";
 
 // Create an express application
 const app = express();
@@ -153,7 +154,7 @@ app.post("/requestPasswordReset", async (req, res) => {
 
       await storeResetToken(user.id, resetToken, resetExpires);
 
-      const resetLink = `http://localhost:5173/resetPassword/${resetToken}`;
+      const resetLink = `http://${config.URL}:5173/resetPassword/${resetToken}`;
       await recoverMail({ email, link: resetLink });
 
       res.status(200).json({ message: "Reset password link sent to email." });
@@ -225,5 +226,5 @@ app.post("/changePassword", authenticateToken, async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://${config.URL}:${port}`);
 });

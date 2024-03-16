@@ -11,6 +11,7 @@ import { Button } from "../components/button";
 import TailWindTable from "../components/tainWindTable";
 import { useAuth } from "../context/AuthContext";
 import * as access from "@access";
+import config from "../access/configs/config";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -75,7 +76,7 @@ const CheckBestMortgage = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:3001/storeCheck", checkDetails);
+      const response = await axios.post(`http://${config.URL}:3001/storeCheck`, checkDetails);
       console.log(response.data);
       setCalculated(true);
     } catch (error) {

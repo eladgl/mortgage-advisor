@@ -5,6 +5,7 @@ import axios from "axios";
 import { ImportantLabel } from "../components/label";
 import { Input } from "../components/input";
 import { Button } from "../components/button";
+import config from "../access/configs/config";
 
 const Wrapper = styled.div`
   padding: 1.5rem;
@@ -62,7 +63,7 @@ const Recover = () => {
         setMessage('');
         setError('');
         try {
-            await axios.post("http://localhost:3001/requestPasswordReset", { email: formValues.email });
+            await axios.post(`http://${config.URL}:3001/requestPasswordReset`, { email: formValues.email });
             setMessage("קישור לאיפוס הסיסמא נשלח למייל שלך, לרשותך 25 דקות לשינוי הסיסמא");
         } catch (error) {
             console.error("Error requesting password reset:", error);
