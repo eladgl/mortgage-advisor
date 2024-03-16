@@ -11,6 +11,8 @@ import Select from "../components/select";
 import TextArea from "../components/textArea";
 import { Title } from "../components/Title";
 
+import * as access from "@access";
+
 const Wrapper = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -35,8 +37,6 @@ const GridCell = styled.div`
 const TwoCells = styled(GridCell)`
     grid-column: span 2;
 `;
-
-const reasons = ['אופציה אחרת', 'התייעצות', 'גובה הלוואה'];
 
 const ContactUs = () => {
   const [message, setMessage] = useState('0');
@@ -146,7 +146,7 @@ const ContactUs = () => {
           <Select
             id="reason"
             name="reason"
-            options={reasons}
+            options={ access.general('lists.contactReasons') }
             value={formValues.reason}
             handleSelectChange={handleInputChange} />
         </TwoCells>
