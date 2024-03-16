@@ -22,15 +22,20 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/privateRoute";
 import Footer from "./components/footer";
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ensures the wrapper takes at least the full height of the viewport
+  background-image: linear-gradient(161deg, #265ca5, #0e346b);
+`;
+
 const Layout = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  height: calc(100vh - 64px); 
-`;
+  flex: 1; // Allows the layout to expand and fill the available space
+  width: 100%;
+  background-color: #f4f7fa;
 
-const Wrapper = styled.div`
-  background-image: linear-gradient(161deg, #265ca5, #0e346b);
 `;
 
 const App = () => {
@@ -39,11 +44,11 @@ const App = () => {
       <Router>
         <AuthProvider>
           <TopNavBar />
-          <Layout className="h-screen mt-24">
+          <Layout className="h-screen mt-24 overflow-x-hidden">
             <div className="hidden md:block">
               <NavBar />
             </div>
-            <div className="w-full h-full">
+            <div className="w-full h-full ">
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/contact" element={<ContactUs />} />
