@@ -15,9 +15,6 @@ import * as access from "@access";
 const Wrapper = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 1rem;
   height: 100%;
 `;
 

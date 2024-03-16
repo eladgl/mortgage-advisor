@@ -8,9 +8,6 @@ const Wrapper = styled.div`
   padding: 1.5rem;
   height: 100%;
   margin-bottom: 1rem;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 1rem;
 
   @media (min-width: 640px) {
     padding: 0 2rem;
