@@ -1,48 +1,48 @@
 import React from "react";
 import * as access from "@access";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import firstImage from '../assets/images/first.jpg';
 import secondImage from '../assets/images/second.jpg';
 import thirdImage from '../assets/images/third.jpg';
+import styled from 'styled-components';
+
+import Carousel from "../components/carousel";
+
+const Heading = styled.h1`
+    padding-left: 3rem;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
+    text-align: center;
+    justify-content: center;
+    &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); 
+    }
+`;
+
+
 
 const HomePage = () => {
-  return (
-    <div >
-    <div id="carouselExampleCaptions" className="carousel slide pb-28 pt-14 px-14" data-bs-ride="carousel" >
-    <h1 className="text-4xl text-center text-black font-bold">ברוכים הבאים לאתר שלנו</h1>
-    <div className='flex flex-col mt-8  '>
-    <h1 className="text-4xl text-center text-black font-bold">שרון מור - 207470329</h1> 
-    <h1 className="text-4xl text-center text-black font-bold">אלעד גולדנברג - 11111111</h1> 
-    </div> 
-  
+    return (
+        <div>
+            <h1 className="text-4xl text-center text-black font-bold pt-20">ברוכים הבאים לאתר שלנו</h1>
+            <div className='flex flex-co-2 mt-8 justify-center'>
+                <Heading className="text-4xl">שרון מור - 207470329</Heading>
+                <Heading className="text-4xl">אלעד גולדנברג - 315040519</Heading>
+            </div>
+            
+            <Carousel images={[firstImage, secondImage, thirdImage]} />
 
-    <div className="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <div className="carousel-inner mt-48">
-        <div className="carousel-item active">
-            <img src={firstImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
         </div>
-        <div className="carousel-item">
-            <img src={secondImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
-        </div>
-        <div className="carousel-item">
-            <img src={thirdImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
-        </div>
-    </div>
-    <button className="carousel-control-prev mt-72 scale-150  " type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button className="carousel-control-next  mt-72 scale-150 " type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    </button>
-</div>
-
-    </div>
-  );
+    );
 };
 
 export default HomePage;

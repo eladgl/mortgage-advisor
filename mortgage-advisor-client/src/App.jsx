@@ -20,6 +20,7 @@ import "./index.css";
 import TopNavBar from "./components/topNavBar";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/privateRoute";
+import Footer from "./components/footer";
 
 const Wrapper = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const App = () => {
               </Routes>
             </div>
           </Layout>
+          <Footer />
         </AuthProvider>
       </Router>
     </Wrapper>
