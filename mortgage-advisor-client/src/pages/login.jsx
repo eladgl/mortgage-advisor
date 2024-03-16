@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   padding-top: 8rem;
   background-color: #f4f7fa;
-  min-height: 91vh;
+  min-height: 93vh;
+  font-size: 14px;
+
 `;
 const Form = styled.form`
   width: 100%;
@@ -38,6 +40,8 @@ const PageTitle = styled.h1`
   color: #333;
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 18px;
+
 `;
 const Input = styled.input`
   width: 100%;
@@ -45,6 +49,7 @@ const Input = styled.input`
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+
 `;
 
 const Button = styled.button`
@@ -54,7 +59,6 @@ const Button = styled.button`
   border-radius: 4px;
   background-color: #007bff;
   color: white;
-  font-size: 1rem;
   cursor: pointer;
   &:hover {
     background-color: #0056b3;

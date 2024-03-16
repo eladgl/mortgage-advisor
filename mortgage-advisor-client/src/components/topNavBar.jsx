@@ -16,7 +16,7 @@ const TopNavBar = () => {
   }));
 
   const unRegisteredDropDownLinks = [
-    { name: "צור קשר", path: "/contactus" },
+    { name: "צור קשר", path: "/contact" },
     { name: "הרשמה", path: "/registration" },
   ];
 

@@ -6,19 +6,28 @@ import { Input } from "../components/input";
 import { Button } from "../components/button";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import { Title } from "../components/Title";
 const Wrapper = styled.div`
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 1rem;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 93vh;
+  background-color: #f4f7fa;
+  font-size:14px;
+`;
 
-  @media (min-width: 640px) {
-    padding: 0 2rem;
-    margin-bottom: 2rem;
-  }
+const Form = styled.form`
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  margin: auto;
+  margin-top: 72px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size:14px;
+
 `;
 
 const GridCell = styled.div`
@@ -37,17 +46,17 @@ const ErrorServerMessage = styled.div`
   border-radius: 4px;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 1rem;
   font-family: "Arial", sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
+
 const ChangePassword = () => {
   const [formValues, setFormValues] = useState({
     oldPassword: "",
     newPassword: "",
     repeatNewPassword: "",
   });
-  const { user } = useAuth(); // Get user data from context
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
   const [serverError, setServerError] = useState("");
@@ -96,8 +105,10 @@ const ChangePassword = () => {
   };
 
   return (
-    <Wrapper >
-      <form onSubmit={handleSubmit} className="pt-4">
+    <Wrapper>
+      <Form onSubmit={handleSubmit}>
+      <Title>שינוי סיסמא</Title>
+
         <GridCell>
           <ImportantLabel htmlFor="oldPassword">סיסמא ישנה</ImportantLabel>
           <Input
@@ -119,14 +130,10 @@ const ChangePassword = () => {
             value={formValues.newPassword}
             onChange={handleInputChange}
           />
-          {errorMessages.newPassword && (
-            <ErrorMessage>{errorMessages.newPassword}</ErrorMessage>
-          )}
+          {errorMessages.newPassword && <ErrorMessage>{errorMessages.newPassword}</ErrorMessage>}
         </GridCell>
         <GridCell>
-          <ImportantLabel htmlFor="repeatNewPassword">
-            אישור סיסמא חדשה
-          </ImportantLabel>
+          <ImportantLabel htmlFor="repeatNewPassword">אישור סיסמא חדשה</ImportantLabel>
           <Input
             type="password"
             id="repeatNewPassword"
@@ -135,16 +142,13 @@ const ChangePassword = () => {
             value={formValues.repeatNewPassword}
             onChange={handleInputChange}
           />
-          {errorMessages.repeatNewPassword && (
-            <ErrorMessage>{errorMessages.repeatNewPassword}</ErrorMessage>
-          )}
+          {errorMessages.repeatNewPassword && <ErrorMessage>{errorMessages.repeatNewPassword}</ErrorMessage>}
         </GridCell>
-        {serverError && <ErrorServerMessage>{serverError}</ErrorServerMessage>}{" "}
-        {/* Display server-side error */}
+        {serverError && <ErrorServerMessage>{serverError}</ErrorServerMessage>}
         <GridCell>
           <Button type="submit">שנה סיסמא</Button>
         </GridCell>
-      </form>
+      </Form>
     </Wrapper>
   );
 };

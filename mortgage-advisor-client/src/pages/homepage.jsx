@@ -25,22 +25,19 @@ const HomePage = () => {
 
     <div className="carousel-inner mt-48">
         <div className="carousel-item active">
-            <img src={firstImage} className="d-block w-100 h-96" alt="..."/>
+            <img src={firstImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
         </div>
         <div className="carousel-item">
-            <img src={secondImage} className="d-block w-100 h-96" alt="..."/>
+            <img src={secondImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
         </div>
         <div className="carousel-item">
-            <img src={thirdImage} className="d-block w-100 h-96" alt="..."/>
+            <img src={thirdImage} className="d-block w-100 h-96 scale-y-150" alt="..."/>
         </div>
     </div>
-    <button className="carousel-control-prev mt-72 scale-150 " type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <button className="carousel-control-prev mt-72 scale-150  " type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
     </button>
     <button className="carousel-control-next  mt-72 scale-150 " type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
     </button>
 </div>
 
