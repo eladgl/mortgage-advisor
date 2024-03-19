@@ -10,10 +10,10 @@ import config from "../access/configs/config";
 const Wrapper = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 1rem;
+  max-width: 400px;
   height: 100%;
+  margin: auto;
+  font-size: 14px;
 
   @media (min-width: 640px) {
     padding: 0 2rem;
@@ -40,6 +40,8 @@ const ErrorMessage = styled(Message)`
 const SuccessMessage = styled(Message)`
   color: #2e7d32;
   background-color: #e8f5e9;
+  font-size: 14px;
+
 `;
 
 const Recover = () => {
