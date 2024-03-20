@@ -52,7 +52,7 @@ const FewLoans = () => {
                     <p>החלטה של הבנק<br />האם לאשר<br />הלוואה פרטנית</p>
                 </div>
                 <LeftArrow />
-                <p>מחפש עזרה בתהליך? <TailWindLink href="contactUs">פנה אלינו לפרטים</TailWindLink></p>
+                <p>מחפש עזרה בתהליך? <TailWindLink href="/contact">פנה אלינו לפרטים</TailWindLink></p>
                 <p style={{fontWeight: '700', fontSize:'1.6rem'}} >עלויות משוערות</p>
                 <p>פתיחת בקשה פרטנית: 500 ש"ח</p>
             </div>
