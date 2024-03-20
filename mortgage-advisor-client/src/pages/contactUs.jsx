@@ -141,7 +141,7 @@ const ContactUs = () => {
             name="reason"
             options={ access.general('lists.contactReasons') }
             value={formValues.reason}
-            onChange={handleInputChange}
+            handleSelectChange={handleInputChange}
           />
         </TwoCells>
         <TwoCells>
@@ -150,7 +150,7 @@ const ContactUs = () => {
             name="contactMessage"
             placeholder="נושא הפנייה"
             value={formValues.contactMessage}
-            onChange={handleInputChange}
+            handleTextAreaChange={handleInputChange}
             required
           />
         </TwoCells>
