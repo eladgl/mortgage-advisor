@@ -2,16 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+*, *::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box inherit;
   direction: rtl;
 }
 
 html {
   font-size: 62.5%;
-  /* 10px */
+}
+/* Phone */
+@media only screen and (max-width: 37.5em) {
+  html {
+      font-size: 75%; /* 12px */
+  }
+}
+
+/* Tablet Portrait */
+@media only screen and (max-width: 56.25em) {
+  html {
+      font-size: 87.5%; /* 14px */
+  }
+}
+
+/* Tablet Landscape */
+@media only screen and (max-width: 75em) {
+  html {
+      font-size: 100%; /* 16px */
+  }
+}
+
+/* Big Desktop */
+@media only screen and (min-width: 112.5em) {
+  html {
+      font-size: 112.5%; /* 18px */
+  }
 }
 
 #NagishLiLogo {
