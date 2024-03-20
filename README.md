@@ -15,6 +15,7 @@ This project contains both client and server applications for the Mortgage Advis
   - **Axios**: A JavaScript library used to make HTTP requests.
   - **Bootstrap**: A front-end framework for developing responsive and mobile-first websites.
   - **Styled Components**: A library for writing CSS in JS to style React components.
+  - **Vite**: A module bundler that also used for relative path importing in the project.
 
 - **Backend:**
   - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
