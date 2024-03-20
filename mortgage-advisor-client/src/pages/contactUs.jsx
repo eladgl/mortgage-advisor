@@ -72,7 +72,7 @@ const ContactUs = () => {
     event.preventDefault();
     if (!isFormValid) return;
     try {
-      const response = await axios.post(`http://${config.URL}:3001/contactUs`, formValues);
+      const response = await axios.post(`http://${config.URL}:3001/contact`, formValues);
       setMessage("success");
     } catch (error) {
       console.error("Error submitting form:", error);

@@ -11,11 +11,12 @@ const RangeWrapper = styled.div`
 
 const RangeInput = styled(Input)`
   direction: ltr;
+  padding: 0;
 `;
 
 const Hint = styled.div`
   position: absolute; 
-  top: 2.4rem;
+  top: 1.6rem;
   left: ${(props) => `${props.left}%`};
   color: white; 
   border: 1px solid blue; 
@@ -55,7 +56,7 @@ const RangeSlider = ({ minValue, maxValue, handleRangeChange, name, id }) => {
             const rangeVal = rangeRef.current.value;
             const offset = (rangeVal - minValue) * (100 / (maxValue - minValue));
             const hintWidth = hintRef.current.offsetWidth;
-            const hintOffset = offset - (hintWidth / clientWidth) * offset;
+            const hintOffset = offset - (hintWidth  / clientWidth) * offset - 2*rangeVal/(maxValue - minValue);
             setHintPosition(hintOffset);
         }
     };
@@ -72,6 +73,7 @@ const RangeSlider = ({ minValue, maxValue, handleRangeChange, name, id }) => {
                 name={ name }
                 type="range"
                 min={minValue}
+                step="1"
                 max={maxValue}
                 ref={rangeRef}
                 value={value}
