@@ -6,7 +6,7 @@ import { linksConfig } from "../pages/config/linksConfig";
 import { useAuth } from "../context/AuthContext";
 const TopNavBar = () => {
   const { isAuthenticated, user  } = useAuth();
-  const registeredDropDownLinks = linksConfig
+  const dropDownLinks = linksConfig
   .filter(link => {
     return link.path === link.root;
   })
@@ -15,10 +15,6 @@ const TopNavBar = () => {
     path: link.path,
   }));
 
-  const unRegisteredDropDownLinks = [
-    { name: "צור קשר", path: "/contact" },
-    { name: "הרשמה", path: "/registration" },
-  ];
 
   return (
     <nav
@@ -38,11 +34,7 @@ const TopNavBar = () => {
         {isAuthenticated && user && (
             <span className="  text-white text-xl font-bold mt-2 ml-8">{`${user.pname || ''} ${user.lname || ''}`}</span> // Adjust this according to how the user name is stored
           )}        
-          {isAuthenticated ? (
-            <DropDown dropDownLinks={registeredDropDownLinks}  />
-          ) : (
-            <DropDown dropDownLinks={unRegisteredDropDownLinks} />
-          )}
+           <DropDown dropDownLinks={dropDownLinks}  />
   
         </div>
       </div>

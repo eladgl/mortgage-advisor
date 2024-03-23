@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate} from "react-router-dom";
 
 import Select from "../components/select";
 import { ImportantLabel, Label } from "../components/label";
@@ -42,6 +43,7 @@ const ChosenTitles = styled.h1`
 const CheckBestMortgage = () => {
   const [calculated, setCalculated] = useState(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     bankName: '',
@@ -66,7 +68,11 @@ const CheckBestMortgage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid) return;
-
+    if(!user){
+      alert('You must login in order to submit, redirecting you to login page..');
+      navigate('/login');
+      return;
+    }
     const checkDetails = {
       userId: user.id,
       userPrivateName: user.pname,
@@ -191,14 +197,14 @@ const CheckBestMortgage = () => {
     <>
       <h3>מעוניין לקחת הלוואה רגילה</h3>
       <h3>מעוניין לקחת הלוואה עד 100 אלף ש"ח</h3>
-      <ChosenTitles className='text-center lg:text-right'>אני מעוניין לקחת הלוואה אחת</ChosenTitles>
+      <ChosenTitles className='text-center lg:text-right'>איפה הכי כדאי לי לקחת משכנתא</ChosenTitles>
       {renderGrid()}
     </>
   );
 
   const renderResult = () => (
     <>
-      <p className="pb-10">
+      <p className="pb-10 ">
         הכי כדאי מבחינת עמלות - אופצייה ג'{" "}
         <span style={{ color: 'green' }}>בנק לאומי</span>
       </p>

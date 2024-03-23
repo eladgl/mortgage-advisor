@@ -19,7 +19,6 @@ import styled from "styled-components";
 import "./index.css";
 import TopNavBar from "./components/topNavBar";
 import { AuthProvider } from "./context/AuthContext";
-import PrivateRoute from "./components/privateRoute";
 import Footer from "./components/footer";
 
 
@@ -57,11 +56,11 @@ const App = () => {
                 <Route path="/registration" element={<Register />} />
                 <Route path="/recover" element={<Recover />} />
                 <Route path="/resetPassword/:token" element={<ResetPassword />} />
-                <Route path="/mortgages/new/checkBest" element={<PrivateRoute><CheckBestMortgage /></PrivateRoute>} />
-                <Route path="/loans/normal/upTo100k/one" element={<PrivateRoute><OneLoan /></PrivateRoute>} />
-                <Route path="/loans/normal/upTo100k/few" element={<PrivateRoute><FewLoans /></PrivateRoute>} />
-                <Route path="/loans/normal/over100k" element={<PrivateRoute><Over100kLoan /></PrivateRoute>} />
-                <Route path="/changePassword" element={<PrivateRoute><ChangePass /></PrivateRoute>} />
+                <Route path="/mortgages/new/checkBest" element={<CheckBestMortgage />} />
+                <Route path="/loans/normal/upTo100k/one" element={<OneLoan />} />
+                <Route path="/loans/normal/upTo100k/few" element={<FewLoans />} />
+                <Route path="/loans/normal/over100k" element={<Over100kLoan />} />
+                <Route path="/changePassword" element={<ChangePass />} />
                 <Route path="*" element={<PageNotFound />} /> 
               </Routes>
             </div>

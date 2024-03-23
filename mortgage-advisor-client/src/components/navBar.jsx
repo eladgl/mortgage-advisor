@@ -6,7 +6,6 @@ import { Link, useLocation  } from "react-router-dom";
 import { linksConfig } from "../pages/config/linksConfig";
 import * as access from "@access";
 import * as types from "../pages/constants/pagesTypes";
-import { useAuth } from "../context/AuthContext";
 
 import SvgIcon from "./svgIcon";
 
@@ -23,11 +22,6 @@ const activeLinkStyle = css`
   color: black; /* Active link text color */
   font-weight: bold; /* Active link font weight */
   border-right: 4px solid #333; /* Active link right border */
-`;
-const LinkContainer = styled.div`
-  padding-top: 0; /* Changed from 1.2rem to 0 to remove initial top padding */
-  display: flex;
-  flex-direction: row;
 `;
 
 const NavigationDiv = styled.div`
@@ -181,7 +175,6 @@ const NavigationLink = styled(Link)`
 
 
 const NavBar = () => {
-  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const { pathname } = useLocation(); 
 
@@ -189,19 +182,27 @@ const NavBar = () => {
     if (currentPath === '/' && linkPath === '/') return true;
     return currentPath == linkPath || (currentPath.startsWith(linkRoot) && linkPath !== '/');
   };
-  const registeredDropDownLinks = linksConfig.map((link) => ({
+  // const dropDownLinks = linksConfig.map((link) => ({
+  //   name: link.title,
+  //   path: link.path,
+  //   root: link.root,
+  //   icon: link.icon,
+  //   padding: link.padding,
+  //   bold: location.pathname === link.path || location.pathname === link.secondaryPath,
+  // }));
+  const dropDownLinks = linksConfig
+  .filter(link => {
+    return link.path === link.root;
+  })
+  .map(link => ({
     name: link.title,
     path: link.path,
     root: link.root,
     icon: link.icon,
-    padding: link.padding,
+    // padding: link.padding,
     bold: location.pathname === link.path || location.pathname === link.secondaryPath,
   }));
 
-  const unRegisteredDropDownLinks = [
-    { name: "התחבר", path: "/login" },
-    { name: "רישום", path: "/registration" },
-  ];
   const renderLi = (links) => {
     return links.map((link, index) => {
       const isActive = checkActiveLink(pathname, link.path, link.root);
@@ -228,7 +229,7 @@ const NavBar = () => {
           <NavigationBackground className="navigation__background  ">
             <NavigationNav className="navigation__nav">
               <NavigationList className="navigation__list ">
-                {renderLi(isAuthenticated ? registeredDropDownLinks : unRegisteredDropDownLinks)}
+                {renderLi(dropDownLinks)}
               </NavigationList>
             </NavigationNav>
           </NavigationBackground>
