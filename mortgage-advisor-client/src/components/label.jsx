@@ -19,7 +19,6 @@ export const ImportantLabel = styled(Label)`
     top: 0;
     right: -10px;
     color: red;
-
     .dark {
       color: yellow;
     }

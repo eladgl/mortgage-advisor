@@ -121,7 +121,7 @@ const OneLoan = () => {
         return (
             <>
                 <div className="grid grid-cols-4 grid-rows-1 gap-4" style={{ margin: '3rem 0 -3rem 0' }}>
-                    <p>יש ליצור קשר עם <br />הבנק<TailWindLink to="#">דוגמה לבנק<br />יהב</TailWindLink></p>
+                    <p>יש ליצור קשר עם <br />הבנק<TailWindLink to="#"> דוגמה לבנק<br />יהב</TailWindLink></p>
                     <p>נא לספק ת.ז,<br />פרטי חשבון בנק,<br />פרטים נוספים לפי<br />הצורך</p>
                     <p>יש לשלוח 3<br />משכורות אחרונות</p>
                     <p>הכסף מתקבל<br />בחשבון</p>
